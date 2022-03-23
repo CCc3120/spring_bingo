@@ -1,0 +1,13 @@
+server:
+  port: 8082
+
+log:
+  level: debug
+
+spring:
+  datasource:
+    # jdbc:mysql://121.43.63.109:3028/spring_bingo?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&&serverTimezone=Asia/Shanghai
+    # useSSL=false 显式设置
+    url: jdbc:mysql://121.43.63.109:3028/spring_bingo?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai
+    username: bingo
+    password: knxzvu213
