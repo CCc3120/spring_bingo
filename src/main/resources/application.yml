@@ -63,7 +63,7 @@ spring:
             # sql 过滤,不允许删表
             drop-table-allow: false
         slf4j:
-          enabled: true
+          enabled: false
         # statement-sql-pretty-format: true
         # statement-sql-format-option:
         # log4j:
@@ -94,7 +94,13 @@ spring:
     auto: true
     proxy-target-class: true
 
-#=================================文件上传=================================
+#=================================security=================================
+  security:
+    user:
+      name: admin
+      password: admin
+
+  #=================================文件上传=================================
   servlet:
     multipart:
       # 开启 multipart 上传功能
@@ -107,7 +113,6 @@ spring:
       max-file-size: 200MB
       # 最大请求大小
       max-request-size: 215MB
-
 
 #=================================日志=================================
   #Logback：logback-spring.xml, logback-spring.groovy, logback.xml, logback.groovy
@@ -125,3 +130,17 @@ mybatis-plus:
   mapper-locations: classpath*:com/bingo/spring_bingo/**/xml/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    default-fetch-size: 10
+    # 开启器懒加载
+    lazy-loading-enabled: true
+    # 对任意延迟属性的调用会使带有延迟加载属性的对象完整加载
+    aggressive-lazy-loading: false
+    # 触发懒加载方法，因为不需要，平时很少用到，所以用clone，不配置懒加载不生效
+    lazy-load-trigger-methods:
+      - clone
+  global-config:
+    db-config:
+#      自动填充中设置了
+#      id-type: assign_uuid
+      logic-delete-value: N
+      logic-not-delete-value: Y
