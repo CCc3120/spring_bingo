@@ -130,7 +130,7 @@ mybatis-plus:
   mapper-locations: classpath*:com/bingo/spring_bingo/**/xml/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    default-fetch-size: 10
+    default-fetch-size: 3
     # 开启器懒加载
     lazy-loading-enabled: true
     # 对任意延迟属性的调用会使带有延迟加载属性的对象完整加载

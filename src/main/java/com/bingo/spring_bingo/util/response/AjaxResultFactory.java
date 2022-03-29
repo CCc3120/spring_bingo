@@ -20,23 +20,23 @@ public class AjaxResultFactory {
         return new AjaxResult(HttpStatusEnum.ERROR.getCode(), HttpStatusEnum.ERROR.getDesc(), null);
     }
 
+    public static AjaxResult build(HttpStatusEnum httpStatusEnum) {
+        return new AjaxResult(httpStatusEnum.getCode(), httpStatusEnum.getDesc(), null);
+    }
+
+    public static AjaxResult build(HttpStatusEnum httpStatusEnum, String message) {
+        return new AjaxResult(httpStatusEnum.getCode(), message, null);
+    }
+
+    public static AjaxResult build(HttpStatusEnum httpStatusEnum, Object data) {
+        return new AjaxResult(httpStatusEnum.getCode(), httpStatusEnum.getDesc(), data);
+    }
+
+    public static AjaxResult build(HttpStatusEnum httpStatusEnum, String message, Object data) {
+        return new AjaxResult(httpStatusEnum.getCode(), message, data);
+    }
+
     public static AjaxResultProxy build() {
         return new AjaxResultProxy();
-    }
-
-    public static AjaxResultProxy build(HttpStatusEnum httpStatusEnum) {
-        return new AjaxResultProxy(httpStatusEnum.getCode(), httpStatusEnum.getDesc(), null);
-    }
-
-    public static AjaxResultProxy build(HttpStatusEnum httpStatusEnum, String message) {
-        return new AjaxResultProxy(httpStatusEnum.getCode(), message, null);
-    }
-
-    public static AjaxResultProxy build(HttpStatusEnum httpStatusEnum, Object data) {
-        return new AjaxResultProxy(httpStatusEnum.getCode(), httpStatusEnum.getDesc(), data);
-    }
-
-    public static AjaxResultProxy build(HttpStatusEnum httpStatusEnum, String message, Object data) {
-        return new AjaxResultProxy(httpStatusEnum.getCode(), message, data);
     }
 }

@@ -1,6 +1,7 @@
 package com.bingo.spring_bingo.system.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.bingo.spring_bingo.system.model.SysOrgDept;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,4 +17,6 @@ public interface SysOrgDeptMapper extends BaseMapper<SysOrgDept> {
     SysOrgDept findByPrimaryKey(String primaryKey);
 
     List<SysOrgDept> findChildren(String primaryKey);
+
+    IPage<SysOrgDept> findPageList(IPage<SysOrgDept> page);
 }

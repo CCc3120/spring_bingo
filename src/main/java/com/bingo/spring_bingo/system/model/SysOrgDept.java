@@ -3,6 +3,7 @@ package com.bingo.spring_bingo.system.model;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.bingo.spring_bingo.system.interfaces.ISysOrgDept;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
@@ -17,7 +18,6 @@ public class SysOrgDept extends SysOrgElement implements ISysOrgDept {
 
     public SysOrgDept() {
         super();
-        setFdOrgType(ORG_TYPE_DEPT);
     }
 
     @Override
@@ -29,6 +29,7 @@ public class SysOrgDept extends SysOrgElement implements ISysOrgDept {
      * 当前部门领导
      */
     @TableField(exist = false)
+    @JsonIgnoreProperties(clazz = SysOrgUser.class, isShow = true, value = {"fdName"})
     private SysOrgUser fdThisLeader;
 
     public SysOrgUser getFdThisLeader() {
@@ -40,7 +41,8 @@ public class SysOrgDept extends SysOrgElement implements ISysOrgDept {
     }
 
     @TableField(exist = false)
-    public SysOrgDept fdParent;
+    @JsonIgnoreProperties(clazz = SysOrgDept.class, isShow = true, value = {"fdName"})
+    private SysOrgDept fdParent;
 
     public SysOrgDept getFdParent() {
         return fdParent;
@@ -54,7 +56,8 @@ public class SysOrgDept extends SysOrgElement implements ISysOrgDept {
      * 子部门
      */
     @TableField(exist = false)
-    public List<SysOrgDept> fdChildren;
+    @JsonIgnoreProperties(clazz = SysOrgDept.class, isShow = true, value = {"fdName"})
+    private List<SysOrgDept> fdChildren;
 
     public List<SysOrgDept> getFdChildren() {
         return fdChildren;
@@ -64,4 +67,18 @@ public class SysOrgDept extends SysOrgElement implements ISysOrgDept {
         this.fdChildren = fdChildren;
     }
 
+    /**
+     * 所在机构
+     */
+    @TableField(exist = false)
+    @JsonIgnoreProperties(clazz = SysOrgOrg.class, isShow = true, value = {"fdName"})
+    private SysOrgOrg fdOrg;
+
+    public SysOrgOrg getFdOrg() {
+        return fdOrg;
+    }
+
+    public void setFdOrg(SysOrgOrg fdOrg) {
+        this.fdOrg = fdOrg;
+    }
 }

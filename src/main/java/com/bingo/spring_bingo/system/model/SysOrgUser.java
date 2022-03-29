@@ -7,6 +7,7 @@ import com.bingo.spring_bingo.system.interfaces.ISysOrgUser;
 import com.bingo.spring_bingo.util.StringUtil;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户
@@ -19,7 +20,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
 
     public SysOrgUser() {
         super();
-        setFdOrgType(ORG_TYPE_PERSON);
     }
 
     @Override
@@ -199,5 +199,18 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
 
     public void setFdLockTime(Date fdLockTime) {
         this.fdLockTime = fdLockTime;
+    }
+
+    /**
+     * 用户拥有的角色
+     */
+    private List<SysOrgRole> fdRole;
+
+    public List<SysOrgRole> getFdRole() {
+        return fdRole;
+    }
+
+    public void setFdRole(List<SysOrgRole> fdRole) {
+        this.fdRole = fdRole;
     }
 }

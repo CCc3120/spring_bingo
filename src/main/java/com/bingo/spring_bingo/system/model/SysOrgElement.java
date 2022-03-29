@@ -3,7 +3,6 @@ package com.bingo.spring_bingo.system.model;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.bingo.spring_bingo.common.constant.SysModelEnum;
-import com.bingo.spring_bingo.common.constant.SysOrgConstant;
 import com.bingo.spring_bingo.common.model.BaseModel;
 import com.bingo.spring_bingo.system.interfaces.ISysOrgElement;
 import com.bingo.spring_bingo.util.ObjectUtil;
@@ -17,21 +16,7 @@ import java.util.Date;
  * @author bingo
  * @date 2022-03-25 14:17
  */
-public abstract class SysOrgElement extends BaseModel implements ISysOrgElement, SysOrgConstant {
-    /**
-     * 类型
-     */
-    @TableField(value = "fd_org_type")
-    private Integer fdOrgType;
-
-    @Override
-    public Integer getFdOrgType() {
-        return fdOrgType;
-    }
-
-    public void setFdOrgType(Integer fdOrgType) {
-        this.fdOrgType = fdOrgType;
-    }
+public abstract class SysOrgElement extends BaseModel implements ISysOrgElement {
 
     /**
      * 名称

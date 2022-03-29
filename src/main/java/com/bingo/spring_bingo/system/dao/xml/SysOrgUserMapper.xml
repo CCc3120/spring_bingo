@@ -3,7 +3,6 @@
 <mapper namespace="com.bingo.spring_bingo.system.dao.SysOrgUserMapper" >
     <resultMap id="BaseResultMap" type="com.bingo.spring_bingo.system.model.SysOrgUser">
         <id     property="fdId"             column="fd_id"></id>
-        <result property="fdOrgType"        column="fd_org_type"></result>
         <result property="fdName"           column="fd_name"></result>
         <result property="fdNamePinYin"     column="fd_name_pin_yin"></result>
         <result property="fdNo"             column="fd_no"></result>
@@ -24,15 +23,14 @@
         <result property="fdBirthday"       column="fd_birthday"></result>
         <result property="fdIsLock"         column="fd_is_lock"></result>
         <result property="fdLockTime"       column="fd_lock_time"></result>
-
     </resultMap>
 
     <sql id="BaseSql">
-        ${mark}.fd_id, ${mark}.fd_org_type, ${mark}.fd_name, ${mark}.fd_name_pin_yin, ${mark}.fd_no,
-        ${mark}.fd_is_available, ${mark}.fd_memo, ${mark}.fd_create_time, ${mark}.fd_alter_time,
-        ${mark}.fd_email, ${mark}.fd_mobile_no,${mark}.fd_login_name,${mark}.fd_nick_name,
-        ${mark}.fd_work_phone,${mark}.fd_wechat_no, ${mark}.fd_sex,${mark}.fd_password,
-        ${mark}.fd_last_change_pwd,${mark}.fd_birthday,${mark}.fd_is_lock,${mark}.fd_lock_time
+        ${mark}.fd_id, ${mark}.fd_name, ${mark}.fd_name_pin_yin, ${mark}.fd_no,${mark}.fd_order,
+        ${mark}.fd_is_available, ${mark}.fd_memo, ${mark}.fd_create_time,${mark}.fd_alter_time,
+        ${mark}.fd_email, ${mark}.fd_mobile_no, ${mark}.fd_login_name,${mark}.fd_nick_name,
+        ${mark}.fd_work_phone, ${mark}.fd_wechat_no, ${mark}.fd_sex,${mark}.fd_password,
+        ${mark}.fd_last_change_pwd, ${mark}.fd_birthday, ${mark}.fd_is_lock,${mark}.fd_lock_time
     </sql>
 
     <select id="findByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -42,4 +40,6 @@
         </include>
         from sys_org_user where sys_org_user.fd_id = #{primaryKey}
     </select>
+
+
 </mapper>

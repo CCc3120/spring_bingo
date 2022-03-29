@@ -12,7 +12,6 @@ public class SysOrgPost extends SysOrgElement implements ISysOrgPost {
 
     public SysOrgPost() {
         super();
-        setFdOrgType(new Integer(ORG_TYPE_POST));
     }
 
     @Override

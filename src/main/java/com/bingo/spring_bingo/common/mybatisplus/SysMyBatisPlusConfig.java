@@ -2,11 +2,9 @@ package com.bingo.spring_bingo.common.mybatisplus;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * mybatis-plus 配置
@@ -15,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @date 2022-03-24 20:24
  */
 @Configuration
-@EnableTransactionManagement
+// @EnableTransactionManagement
 public class SysMyBatisPlusConfig {
 
     /**
@@ -31,7 +29,7 @@ public class SysMyBatisPlusConfig {
         //分页插件
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
         //乐观锁插件
-        interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
+        // interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
         return interceptor;
     }
 }

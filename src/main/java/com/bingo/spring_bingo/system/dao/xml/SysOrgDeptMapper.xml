@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bingo.spring_bingo.system.dao.SysOrgDeptMapper" >
+<mapper namespace="com.bingo.spring_bingo.system.dao.SysOrgDeptMapper">
     <resultMap id="BaseResultMap" type="com.bingo.spring_bingo.system.model.SysOrgDept">
         <id     property="fdId"             column="fd_id"></id>
-        <result property="fdOrgType"        column="fd_org_type"></result>
         <result property="fdName"           column="fd_name"></result>
         <result property="fdNamePinYin"     column="fd_name_pin_yin"></result>
         <result property="fdNo"             column="fd_no"></result>
@@ -12,16 +11,25 @@
         <result property="fdMemo"           column="fd_memo"></result>
         <result property="fdCreateTime"     column="fd_create_time"></result>
         <result property="fdAlterTime"      column="fd_alter_time"></result>
-        <association property="fdThisLeader" column="fd_this_leader" select="com.bingo.spring_bingo.system.dao.SysOrgUserMapper.findByPrimaryKey" fetchType="lazy"></association>
-        <association property="fdParent" column="fd_parent_id" select="findByPrimaryKey" fetchType="lazy"></association>
 
-        <collection property="fdChildren" column="fd_id" select="findChildren" fetchType="lazy"></collection>
+        <association property="fdThisLeader" column="fd_this_leader" fetchType="lazy"
+                     javaType="com.bingo.spring_bingo.system.model.SysOrgUser"
+                     select="com.bingo.spring_bingo.system.dao.SysOrgUserMapper.findByPrimaryKey"></association>
+
+        <association property="fdParent" column="fd_parent_id" fetchType="lazy"
+                     javaType="com.bingo.spring_bingo.system.model.SysOrgDept"
+                     select="findByPrimaryKey"></association>
+
+        <collection property="fdChildren" column="fd_id" fetchType="lazy"
+                    javaType="java.util.ArrayList"
+                    ofType="com.bingo.spring_bingo.system.model.SysOrgDept"
+                    select="findChildren"></collection>
     </resultMap>
 
     <sql id="BaseSql">
-        ${mark}.fd_id, ${mark}.fd_org_type, ${mark}.fd_name, ${mark}.fd_name_pin_yin, ${mark}.fd_no,
-        ${mark}.fd_is_available, ${mark}.fd_memo, ${mark}.fd_create_time, ${mark}.fd_alter_time,
-        ${mark}.fd_parent_id
+        ${mark}.fd_id, ${mark}.fd_name, ${mark}.fd_name_pin_yin, ${mark}.fd_no,${mark}.fd_order,
+        ${mark}.fd_is_available, ${mark}.fd_memo, ${mark}.fd_create_time,${mark}.fd_alter_time,
+        ${mark}.fd_parent_id, ${mark}.fd_this_leader
     </sql>
 
     <select id="findByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -39,4 +47,14 @@
         </include>
         from sys_org_dept where sys_org_dept.fd_parent_id = #{primaryKey}
     </select>
+
+    <select id="findPageList" resultMap="BaseResultMap">
+        select
+        <include refid="BaseSql">
+            <property name="mark" value="sys_org_dept" />
+        </include>
+        from sys_org_dept
+    </select>
+
+
 </mapper>

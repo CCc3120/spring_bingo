@@ -7,11 +7,6 @@ package com.bingo.spring_bingo.system.interfaces;
 public interface ISysOrgElement {
 
     /**
-     * @return 组织架构元素类型
-     */
-    Integer getFdOrgType();
-
-    /**
      * @return 名称
      */
     String getFdName();

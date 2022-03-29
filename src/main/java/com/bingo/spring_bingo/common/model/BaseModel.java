@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.bingo.spring_bingo.util.IDGenerator;
 import com.bingo.spring_bingo.util.ObjectUtil;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -15,6 +16,7 @@ import java.lang.reflect.Method;
  * @author bingo
  * @date 2022-03-25 13:37
  */
+@JsonIgnoreProperties(value = {"handler"}) // 解决因懒加载触发序列化问题
 public abstract class BaseModel implements IBaseModel, Serializable {
 
     @TableId(value = "fd_id", type = IdType.INPUT)
@@ -46,14 +48,16 @@ public abstract class BaseModel implements IBaseModel, Serializable {
                 String methodName = methodList[i].getName();
                 if (methodList[i].getParameterTypes().length > 0
                         || !methodName.startsWith("get")
-                        || methodName.equals("getClass"))
+                        || methodName.equals("getClass")) {
                     continue;
+                }
                 methodName = methodList[i].getReturnType().toString();
                 if ((methodName.startsWith("class")
                         || methodName.startsWith("interface"))
                         && !(methodName.startsWith("class java.lang.")
-                        || methodName.startsWith("interface java.lang.")))
+                        || methodName.startsWith("interface java.lang."))) {
                     continue;
+                }
                 try {
                     rtnVal.append(methodList[i].getName().substring(3), methodList[i].invoke(this, null));
                 } catch (Exception e) {
