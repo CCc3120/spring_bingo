@@ -2,8 +2,10 @@ package com.bingo.spring_bingo.system.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.bingo.spring_bingo.system.interfaces.ISysOrgOrg;
+import com.bingo.spring_bingo.util.ArrayUtil;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,16 +69,34 @@ public class SysOrgOrg extends SysOrgElement implements ISysOrgOrg {
     }
 
     /**
-     * 机构部门
+     * 机构下的部门
      */
     @JsonIgnoreProperties(clazz = SysOrgDept.class, isShow = true, value = {"fdName"})
-    private List<SysOrgDept> fdDept;
+    private List<SysOrgDept> fdOrgDept;
 
-    public List<SysOrgDept> getFdDept() {
-        return fdDept;
+    public List<SysOrgDept> getFdOrgDept() {
+        return fdOrgDept;
     }
 
-    public void setFdDept(List<SysOrgDept> fdDept) {
-        this.fdDept = fdDept;
+    public void setFdOrgDept(List<SysOrgDept> fdOrgDept) {
+        this.fdOrgDept = fdOrgDept;
     }
+
+    @Deprecated
+    private List<SysOrgUser> getOrgAllEmployee(SysOrgOrg orgOrg) {
+        List<SysOrgUser> rtnVal = new ArrayList<>();
+        if (!ArrayUtil.isEmpty(orgOrg.getFdChildren())) {
+            for (SysOrgOrg fdChild : orgOrg.getFdChildren()) {
+                rtnVal.addAll(getOrgAllEmployee(fdChild));
+            }
+        }
+        if (!ArrayUtil.isEmpty(orgOrg.getFdOrgDept())) {
+            for (SysOrgDept dept : orgOrg.getFdOrgDept()) {
+                List<SysOrgUser> userList = dept.getFdDeptUser();
+            }
+        }
+        return rtnVal;
+    }
+
+
 }

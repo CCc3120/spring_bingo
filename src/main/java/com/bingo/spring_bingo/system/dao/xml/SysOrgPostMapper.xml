@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bingo.spring_bingo.system.dao.SysOrgPostMapper">
+    <resultMap id="BaseResultMap" type="com.bingo.spring_bingo.system.model.SysOrgPost">
+        <id     property="fdId"             column="fd_id"></id>
+        <result property="fdName"           column="fd_name"></result>
+        <result property="fdNamePinYin"     column="fd_name_pin_yin"></result>
+        <result property="fdNo"             column="fd_no"></result>
+        <result property="fdOrder"          column="fd_order"></result>
+        <result property="fdIsAvailable"    column="fd_is_available"></result>
+        <result property="fdMemo"           column="fd_memo"></result>
+        <result property="fdCreateTime"     column="fd_create_time"></result>
+        <result property="fdAlterTime"      column="fd_alter_time"></result>
+        </resultMap>
+
+    <sql id="BaseSql">
+        ${mark}.fd_id, ${mark}.fd_name, ${mark}.fd_name_pin_yin, ${mark}.fd_no,${mark}.fd_order,
+        ${mark}.fd_is_available, ${mark}.fd_memo, ${mark}.fd_create_time,${mark}.fd_alter_time
+    </sql>
+
+    <select id="findByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="BaseSql">
+            <property name="mark" value="sys_org_post" />
+        </include>
+        from sys_org_post where sys_org_post.fd_id = #{primaryKey}
+    </select>
+
+</mapper>

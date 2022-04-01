@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.bingo.spring_bingo.common.constant.SysModelEnum;
 import com.bingo.spring_bingo.system.interfaces.ISysOrgUser;
 import com.bingo.spring_bingo.util.StringUtil;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Date;
 import java.util.List;
@@ -204,13 +205,42 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     /**
      * 用户拥有的角色
      */
-    private List<SysOrgRole> fdRole;
+    @JsonIgnoreProperties(clazz = SysOrgRole.class, isShow = true, value = {"fdName"})
+    private List<SysOrgRole> fdUserRole;
 
-    public List<SysOrgRole> getFdRole() {
-        return fdRole;
+    public List<SysOrgRole> getFdUserRole() {
+        return fdUserRole;
     }
 
-    public void setFdRole(List<SysOrgRole> fdRole) {
-        this.fdRole = fdRole;
+    public void setFdUserRole(List<SysOrgRole> fdUserRole) {
+        this.fdUserRole = fdUserRole;
+    }
+
+    /**
+     * 用户所在部门
+     */
+    @JsonIgnoreProperties(clazz = SysOrgDept.class, isShow = true, value = {"fdName"})
+    private SysOrgDept fdUserDept;
+
+    public SysOrgDept getFdUserDept() {
+        return fdUserDept;
+    }
+
+    public void setFdUserDept(SysOrgDept fdUserDept) {
+        this.fdUserDept = fdUserDept;
+    }
+
+    /**
+     * 用户岗位
+     */
+    @JsonIgnoreProperties(clazz = SysOrgPost.class, isShow = true, value = {"fdName"})
+    private List<SysOrgPost> fdUserPost;
+
+    public List<SysOrgPost> getFdUserPost() {
+        return fdUserPost;
+    }
+
+    public void setFdUserPost(List<SysOrgPost> fdUserPost) {
+        this.fdUserPost = fdUserPost;
     }
 }

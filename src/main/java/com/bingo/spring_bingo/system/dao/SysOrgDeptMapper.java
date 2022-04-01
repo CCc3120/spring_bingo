@@ -13,10 +13,29 @@ import java.util.List;
  */
 @Mapper
 public interface SysOrgDeptMapper extends BaseMapper<SysOrgDept> {
-
+    /**
+     * 主键查询
+     *
+     * @param primaryKey
+     * @return
+     */
     SysOrgDept findByPrimaryKey(String primaryKey);
 
+    /**
+     * 查询子部门列表
+     *
+     * @param primaryKey
+     * @return
+     */
     List<SysOrgDept> findChildren(String primaryKey);
+
+    /**
+     * 查询机构下部门
+     *
+     * @param fdOrgId
+     * @return
+     */
+    List<SysOrgDept> findByOrgId(String fdOrgId);
 
     IPage<SysOrgDept> findPageList(IPage<SysOrgDept> page);
 }

@@ -1,6 +1,7 @@
 package com.bingo.spring_bingo.system.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
@@ -23,13 +24,14 @@ public class SysOrgRole extends SysOrgElement {
     /**
      * 角色下的权限菜单
      */
-    private List<SysOrgMenu> fdMenu;
+    @JsonIgnoreProperties(clazz = SysOrgMenu.class, isShow = true, value = {"fdName"})
+    private List<SysOrgMenu> fdRoleMenu;
 
-    public List<SysOrgMenu> getFdMenu() {
-        return fdMenu;
+    public List<SysOrgMenu> getFdRoleMenu() {
+        return fdRoleMenu;
     }
 
-    public void setFdMenu(List<SysOrgMenu> fdMenu) {
-        this.fdMenu = fdMenu;
+    public void setFdRoleMenu(List<SysOrgMenu> fdRoleMenu) {
+        this.fdRoleMenu = fdRoleMenu;
     }
 }

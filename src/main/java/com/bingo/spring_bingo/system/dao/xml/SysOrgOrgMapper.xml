@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bingo.spring_bingo.system.dao.SysOrgDeptMapper">
-    <resultMap id="BaseResultMap" type="com.bingo.spring_bingo.system.model.SysOrgDept">
+<mapper namespace="com.bingo.spring_bingo.system.dao.SysOrgOrgMapper">
+    <resultMap id="BaseResultMap" type="com.bingo.spring_bingo.system.model.SysOrgOrg">
         <id     property="fdId"             column="fd_id"></id>
         <result property="fdName"           column="fd_name"></result>
         <result property="fdNamePinYin"     column="fd_name_pin_yin"></result>
@@ -17,66 +17,44 @@
                      javaType="com.bingo.spring_bingo.system.model.SysOrgUser"
                      select="com.bingo.spring_bingo.system.dao.SysOrgUserMapper.findByPrimaryKey"></association>
 
-        <!--父部门-->
+        <!--父机构-->
         <association property="fdParent" column="fd_parent_id" fetchType="lazy"
-                     javaType="com.bingo.spring_bingo.system.model.SysOrgDept"
-                     select="findByPrimaryKey"></association>
-
-        <!--部门所在机构-->
-        <association property="fdDeptOrg" column="fd_org_id" fetchType="lazy"
                      javaType="com.bingo.spring_bingo.system.model.SysOrgOrg"
                      select="findByPrimaryKey"></association>
 
-        <!--子部门-->
+        <!--子机构-->
         <collection property="fdChildren" column="fd_id" fetchType="lazy"
                     javaType="java.util.ArrayList"
-                    ofType="com.bingo.spring_bingo.system.model.SysOrgDept"
+                    ofType="com.bingo.spring_bingo.system.model.SysOrgOrg"
                     select="findChildren"></collection>
 
-        <!--部门用户-->
-        <collection property="fdDeptUser" column="fd_id" fetchType="lazy"
+        <!--机构下部门-->
+        <collection property="fdOrgDept" column="fd_id" fetchType="lazy"
                     javaType="java.util.ArrayList"
-                    ofType="com.bingo.spring_bingo.system.model.SysOrgUser"
-                    select="com.bingo.spring_bingo.system.dao.SysOrgUserMapper.findByDeptId"></collection>
+                    ofType="com.bingo.spring_bingo.system.model.SysOrgDept"
+                    select="com.bingo.spring_bingo.system.dao.SysOrgDeptMapper.findByOrgId"></collection>
     </resultMap>
 
     <sql id="BaseSql">
         ${mark}.fd_id, ${mark}.fd_name, ${mark}.fd_name_pin_yin, ${mark}.fd_no,${mark}.fd_order,
         ${mark}.fd_is_available, ${mark}.fd_memo, ${mark}.fd_create_time,${mark}.fd_alter_time,
-        ${mark}.fd_this_leader, ${mark}.fd_parent_id, ${mark}.fd_org_id
+        ${mark}.fd_this_leader, ${mark}.fd_parent_id
     </sql>
 
     <select id="findByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="BaseSql">
-            <property name="mark" value="sys_org_dept" />
+            <property name="mark" value="sys_org_org" />
         </include>
-        from sys_org_dept where sys_org_dept.fd_id = #{primaryKey}
+        from sys_org_org where sys_org_org.fd_id = #{primaryKey}
     </select>
 
     <select id="findChildren" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="BaseSql">
-            <property name="mark" value="sys_org_dept" />
+            <property name="mark" value="sys_org_org" />
         </include>
-        from sys_org_dept where sys_org_dept.fd_parent_id = #{primaryKey}
+        from sys_org_org where sys_org_org.fd_parent_id = #{primaryKey}
     </select>
-
-    <select id="findByOrgId" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="BaseSql">
-            <property name="mark" value="sys_org_dept" />
-        </include>
-        from sys_org_dept where sys_org_dept.fd_org_id = #{fdOrgId}
-    </select>
-
-    <select id="findPageList" resultMap="BaseResultMap">
-        select
-        <include refid="BaseSql">
-            <property name="mark" value="sys_org_dept" />
-        </include>
-        from sys_org_dept
-    </select>
-
 
 </mapper>
