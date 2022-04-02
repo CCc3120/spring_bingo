@@ -203,20 +203,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     }
 
     /**
-     * 用户拥有的角色
-     */
-    @JsonIgnoreProperties(clazz = SysOrgRole.class, isShow = true, value = {"fdName"})
-    private List<SysOrgRole> fdUserRole;
-
-    public List<SysOrgRole> getFdUserRole() {
-        return fdUserRole;
-    }
-
-    public void setFdUserRole(List<SysOrgRole> fdUserRole) {
-        this.fdUserRole = fdUserRole;
-    }
-
-    /**
      * 用户所在部门
      */
     @JsonIgnoreProperties(clazz = SysOrgDept.class, isShow = true, value = {"fdName"})
@@ -228,6 +214,20 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
 
     public void setFdUserDept(SysOrgDept fdUserDept) {
         this.fdUserDept = fdUserDept;
+    }
+
+    /**
+     * 用户拥有的角色
+     */
+    @JsonIgnoreProperties(clazz = SysOrgRole.class, isShow = true, value = {"fdName"})
+    private List<SysOrgRole> fdUserRole;
+
+    public List<SysOrgRole> getFdUserRole() {
+        return fdUserRole;
+    }
+
+    public void setFdUserRole(List<SysOrgRole> fdUserRole) {
+        this.fdUserRole = fdUserRole;
     }
 
     /**

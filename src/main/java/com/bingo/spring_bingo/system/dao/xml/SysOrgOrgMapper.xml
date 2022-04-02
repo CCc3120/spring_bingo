@@ -32,7 +32,7 @@
         <collection property="fdOrgDept" column="fd_id" fetchType="lazy"
                     javaType="java.util.ArrayList"
                     ofType="com.bingo.spring_bingo.system.model.SysOrgDept"
-                    select="com.bingo.spring_bingo.system.dao.SysOrgDeptMapper.findByOrgId"></collection>
+                    select="com.bingo.spring_bingo.system.dao.SysOrgDeptMapper.findOrgDept"></collection>
     </resultMap>
 
     <sql id="BaseSql">

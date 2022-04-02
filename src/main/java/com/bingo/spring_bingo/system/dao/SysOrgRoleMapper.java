@@ -1,17 +1,17 @@
 package com.bingo.spring_bingo.system.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.bingo.spring_bingo.system.model.SysOrgUser;
+import com.bingo.spring_bingo.system.model.SysOrgRole;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
  * @author bingo
- * @date 2022-03-25 10:07
+ * @date 2022-04-02 17:37
  */
 @Mapper
-public interface SysOrgUserMapper extends BaseMapper<SysOrgUser> {
+public interface SysOrgRoleMapper extends BaseMapper<SysOrgRole> {
 
     /**
      * 主键查询
@@ -19,14 +19,13 @@ public interface SysOrgUserMapper extends BaseMapper<SysOrgUser> {
      * @param primaryKey
      * @return
      */
-    SysOrgUser findByPrimaryKey(String primaryKey);
+    SysOrgRole findByPrimaryKey(String primaryKey);
 
     /**
-     * 查询部门下的员工
+     * 查询用户拥有的所有角色
      *
-     * @param fdDeptId
+     * @param fdUserId
      * @return
      */
-    List<SysOrgUser> findDeptUser(String fdDeptId);
-
+    List<SysOrgRole> findUserRole(String fdUserId);
 }

@@ -31,12 +31,12 @@
         <collection property="fdUserRole" column="fd_id" fetchType="lazy"
                     javaType="java.util.ArrayList"
                     ofType="com.bingo.spring_bingo.system.model.SysOrgRole"
-                    select=""></collection>
+                    select="com.bingo.spring_bingo.system.dao.SysOrgRoleMapper.findUserRole"></collection>
 
         <collection property="fdUserPost" column="fd_id" fetchType="lazy"
                     javaType="java.util.ArrayList"
                     ofType="com.bingo.spring_bingo.system.model.SysOrgPost"
-                    select=""></collection>
+                    select="com.bingo.spring_bingo.system.model.SysOrgPost.findUserPost"></collection>
     </resultMap>
 
     <sql id="BaseSql">
@@ -56,7 +56,7 @@
         from sys_org_user where sys_org_user.fd_id = #{primaryKey}
     </select>
 
-    <select id="findByDeptId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findDeptUser" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="BaseSql">
             <property name="mark" value="sys_org_user" />

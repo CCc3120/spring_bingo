@@ -48,4 +48,12 @@
         from sys_org_menu where sys_org_menu.fd_parent_id = #{primaryKey}
     </select>
 
+    <select id="findRoleMenu" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="BaseSql">
+            <property name="mark" value="sys_org_menu" />
+        </include>
+        from sys_org_menu, role_menu
+        where sys_org_menu.fd_id = role_menu.fd_menu_id and role_menu.fd_role_id = #{fdRoleId}
+    </select>
 </mapper>

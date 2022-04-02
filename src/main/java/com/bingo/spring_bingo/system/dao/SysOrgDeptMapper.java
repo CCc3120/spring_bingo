@@ -35,7 +35,7 @@ public interface SysOrgDeptMapper extends BaseMapper<SysOrgDept> {
      * @param fdOrgId
      * @return
      */
-    List<SysOrgDept> findByOrgId(String fdOrgId);
+    List<SysOrgDept> findOrgDept(String fdOrgId);
 
     IPage<SysOrgDept> findPageList(IPage<SysOrgDept> page);
 }

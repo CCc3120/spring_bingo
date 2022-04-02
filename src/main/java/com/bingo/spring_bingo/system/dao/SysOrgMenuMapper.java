@@ -28,4 +28,12 @@ public interface SysOrgMenuMapper extends BaseMapper<SysOrgMenu> {
      * @return
      */
     List<SysOrgMenu> findChildren(String primaryKey);
+
+    /**
+     * 查询角色下的所有权限
+     *
+     * @param fdRoleId
+     * @return
+     */
+    List<SysOrgMenu> findRoleMenu(String fdRoleId);
 }

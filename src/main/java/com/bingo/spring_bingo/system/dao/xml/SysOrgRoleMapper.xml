@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bingo.spring_bingo.system.dao.SysOrgPostMapper">
-    <resultMap id="BaseResultMap" type="com.bingo.spring_bingo.system.model.SysOrgPost">
+<mapper namespace="com.bingo.spring_bingo.system.dao.SysOrgRoleMapper">
+    <resultMap id="BaseResultMap" type="com.bingo.spring_bingo.system.model.SysOrgRole">
         <id     property="fdId"             column="fd_id"></id>
         <result property="fdName"           column="fd_name"></result>
         <result property="fdNamePinYin"     column="fd_name_pin_yin"></result>
@@ -11,7 +11,12 @@
         <result property="fdMemo"           column="fd_memo"></result>
         <result property="fdCreateTime"     column="fd_create_time"></result>
         <result property="fdAlterTime"      column="fd_alter_time"></result>
-        </resultMap>
+
+        <collection property="fdRoleMenu" column="fd_id" fetchType="lazy"
+                    javaType="java.util.ArrayList"
+                    ofType="com.bingo.spring_bingo.system.model.SysOrgMenu"
+                    select="com.bingo.spring_bingo.system.dao.SysOrgMenuMapper.findRoleMenu"></collection>
+    </resultMap>
 
     <sql id="BaseSql">
         ${mark}.fd_id, ${mark}.fd_name, ${mark}.fd_name_pin_yin, ${mark}.fd_no,${mark}.fd_order,
@@ -21,17 +26,17 @@
     <select id="findByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="BaseSql">
-            <property name="mark" value="sys_org_post" />
+            <property name="mark" value="sys_org_role" />
         </include>
-        from sys_org_post where sys_org_post.fd_id = #{primaryKey}
+        from sys_org_role where sys_org_role.fd_id = #{primaryKey}
     </select>
 
-    <select id="findUserPost" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findUserRole" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="BaseSql">
-            <property name="mark" value="sys_org_post" />
+            <property name="mark" value="sys_org_role" />
         </include>
-        from sys_org_post, user_post
-        where sys_org_post.fd_id = user_post.fd_post_id and user_post.fd_user_id = #{fdUserId}
+        from sys_org_role, user_role
+        where sys_org_role.fd_id = user_role.fd_role_id and user_role.fd_user_id = #{fdUserId}
     </select>
 </mapper>

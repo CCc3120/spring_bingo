@@ -37,7 +37,7 @@
         <collection property="fdDeptUser" column="fd_id" fetchType="lazy"
                     javaType="java.util.ArrayList"
                     ofType="com.bingo.spring_bingo.system.model.SysOrgUser"
-                    select="com.bingo.spring_bingo.system.dao.SysOrgUserMapper.findByDeptId"></collection>
+                    select="com.bingo.spring_bingo.system.dao.SysOrgUserMapper.findDeptUser"></collection>
     </resultMap>
 
     <sql id="BaseSql">
@@ -62,7 +62,7 @@
         from sys_org_dept where sys_org_dept.fd_parent_id = #{primaryKey}
     </select>
 
-    <select id="findByOrgId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findOrgDept" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="BaseSql">
             <property name="mark" value="sys_org_dept" />
