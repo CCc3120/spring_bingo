@@ -1,6 +1,7 @@
 package com.bingo.spring_bingo.system.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class SysOrgMenu extends SysOrgElement {
     /**
      * 菜单父级
      */
+    @JsonIgnoreProperties(clazz = SysOrgMenu.class, isShow = true, value = {"fdName"})
     private SysOrgMenu fdParent;
 
     public SysOrgMenu getFdParent() {
@@ -64,6 +66,7 @@ public class SysOrgMenu extends SysOrgElement {
     /**
      * 菜单子集
      */
+    @JsonIgnoreProperties(clazz = SysOrgMenu.class, isShow = true, value = {"fdName"})
     private List<SysOrgMenu> fdChildren;
 
     public List<SysOrgMenu> getFdChildren() {

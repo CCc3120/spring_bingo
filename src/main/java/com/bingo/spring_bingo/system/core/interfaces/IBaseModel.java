@@ -1,4 +1,4 @@
-package com.bingo.spring_bingo.common.model;
+package com.bingo.spring_bingo.system.core.interfaces;
 
 /**
  * @author bingo

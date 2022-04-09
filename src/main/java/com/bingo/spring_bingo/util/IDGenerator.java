@@ -53,14 +53,4 @@ public class IDGenerator {
         String timeInfo = id.substring(0, 11);
         return new Date(Long.parseLong(timeInfo, 16));
     }
-
-    /**
-     * 查看主键生成时间
-     *
-     * @param id
-     */
-    protected static void printIDTime(String id) {
-        String timeInfo = id.substring(0, 11);
-        System.out.println(new Date(Long.parseLong(timeInfo, 16)));
-    }
 }

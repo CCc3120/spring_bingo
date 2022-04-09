@@ -1,7 +1,8 @@
-package com.bingo.spring_bingo.common.model;
+package com.bingo.spring_bingo.system.core.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.bingo.spring_bingo.system.core.interfaces.IBaseModel;
 import com.bingo.spring_bingo.util.IDGenerator;
 import com.bingo.spring_bingo.util.ObjectUtil;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -59,7 +60,7 @@ public abstract class BaseModel implements IBaseModel, Serializable {
                     continue;
                 }
                 try {
-                    rtnVal.append(methodList[i].getName().substring(3), methodList[i].invoke(this, null));
+                    rtnVal.append(methodList[i].getName().substring(3), methodList[i].invoke(this));
                 } catch (Exception e) {
                 }
             }

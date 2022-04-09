@@ -1,5 +1,13 @@
 package com.bingo.spring_bingo.util;
 
+import net.sourceforge.pinyin4j.PinyinHelper;
+import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Iterator;
 
 /**
@@ -9,6 +17,8 @@ import java.util.Iterator;
  * @date 2022-03-23 17:44
  */
 public class StringUtil {
+
+    private static Logger logger = LoggerFactory.getLogger(StringUtil.class);
 
     /**
      * 判断一个字符串是否为null或空
@@ -128,5 +138,46 @@ public class StringUtil {
             }
         }
         return buf.toString();
+    }
+
+    /**
+     * 汉字转拼音,保留无法转换的
+     *
+     * @param message
+     * @return
+     */
+    public static String getPinYinString(String message) {
+        return getPinYinString(message, true, "", true);
+    }
+
+    /**
+     * 汉字转拼音
+     *
+     * @param message
+     * @param isLow    true 小写  false 大写
+     * @param separate 分隔符
+     * @param retain   是否保留无法转换的字符
+     * @return
+     */
+    public static String getPinYinString(String message, boolean isLow, String separate, boolean retain) {
+        if (isNull(message)) {
+            return null;
+        }
+        HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
+        if (isLow) {
+            //拼音小写
+            format.setCaseType(HanyuPinyinCaseType.LOWERCASE);
+        } else {
+            //拼音大写
+            format.setCaseType(HanyuPinyinCaseType.UPPERCASE);
+        }
+        //不带声调
+        format.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
+        try {
+            return PinyinHelper.toHanYuPinyinString(message, format, separate, retain);
+        } catch (BadHanyuPinyinOutputFormatCombination e) {
+            logger.warn("字符串转化为拼音出现异常：" + e);
+            return null;
+        }
     }
 }

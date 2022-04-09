@@ -3,8 +3,9 @@ package com.bingo.spring_bingo.system.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.bingo.spring_bingo.common.constant.HttpStatusEnum;
 import com.bingo.spring_bingo.common.constant.SysModelEnum;
+import com.bingo.spring_bingo.system.core.response.AjaxResult;
+import com.bingo.spring_bingo.system.core.web.controller.BaseController;
 import com.bingo.spring_bingo.system.dao.SysOrgDeptMapper;
 import com.bingo.spring_bingo.system.dao.SysOrgUserMapper;
 import com.bingo.spring_bingo.system.model.SysOrgDept;
@@ -12,13 +13,10 @@ import com.bingo.spring_bingo.system.model.SysOrgUser;
 import com.bingo.spring_bingo.system.service.ISysOrgDeptService;
 import com.bingo.spring_bingo.system.service.ISysOrgUserService;
 import com.bingo.spring_bingo.util.DateUtil;
-import com.bingo.spring_bingo.util.response.AjaxResult;
-import com.bingo.spring_bingo.util.response.AjaxResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 /**
@@ -27,7 +25,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/user")
-public class SysOrgUserController {
+public class SysOrgUserController extends BaseController {
 
     @Autowired
     private ISysOrgUserService sysOrgUserService;
@@ -49,7 +47,7 @@ public class SysOrgUserController {
         sysOrgDeptService.save(dept);
 
 
-        return AjaxResultFactory.success();
+        return success();
     }
 
     @RequestMapping(value = "/testDept1")
@@ -66,7 +64,7 @@ public class SysOrgUserController {
 
         // sysOrgDeptService.updateById(dept);
 
-        return AjaxResultFactory.success(page1);
+        return success();
     }
 
     @RequestMapping(value = "/testDept2")
@@ -79,7 +77,7 @@ public class SysOrgUserController {
         List<SysOrgDept> list = dept.getFdChildren();
         SysOrgUser user = dept.getFdThisLeader();
 
-        return AjaxResultFactory.success();
+        return success();
     }
 
     @RequestMapping(value = "/test")
@@ -89,7 +87,7 @@ public class SysOrgUserController {
         // sysOrgUserService.updateById(user);
 
         System.out.println(3333);
-        return AjaxResultFactory.build(HttpStatusEnum.SUCCESS);
+        return success();
     }
 
     @RequestMapping(value = "/testAdd")
@@ -106,19 +104,6 @@ public class SysOrgUserController {
         user.setFdOrder(10);
         sysOrgUserService.save(user);
 
-        return AjaxResultFactory.build(HttpStatusEnum.SUCCESS);
-    }
-
-    public static void main(String[] args) {
-
-        Class<?> clazz = SysOrgDept.class;
-
-        while (clazz!=null){
-            Field[] fields = clazz.getDeclaredFields();
-            for (Field field : fields) {
-                System.out.println(field.getName());
-            }
-            clazz = clazz.getSuperclass();
-        }
+        return success();
     }
 }

@@ -1,4 +1,4 @@
-package com.bingo.spring_bingo.common.model;
+package com.bingo.spring_bingo.system.core.interfaces;
 
 import com.bingo.spring_bingo.system.model.SysOrgUser;
 

@@ -1,4 +1,4 @@
-package com.bingo.spring_bingo.util.response;
+package com.bingo.spring_bingo.system.core.response;
 
 /**
  * @author bingo

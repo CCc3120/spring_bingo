@@ -1,6 +1,5 @@
 package com.bingo.spring_bingo.system.model;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.bingo.spring_bingo.common.constant.SysModelEnum;
 import com.bingo.spring_bingo.system.interfaces.ISysOrgUser;
@@ -31,7 +30,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     /**
      * 邮箱
      */
-    @TableField(value = "fd_email")
     private String fdEmail;
 
     @Override
@@ -46,7 +44,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     /**
      * 手机号
      */
-    @TableField(value = "fd_mobile_no")
     private String fdMobileNo;
 
     @Override
@@ -61,7 +58,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     /**
      * 登录名
      */
-    @TableField(value = "fd_login_name")
     private String fdLoginName;
 
     @Override
@@ -76,7 +72,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     /**
      * 昵称/别名
      */
-    @TableField(value = "fd_nick_name")
     private String fdNickName;
 
     public String getFdNickName() {
@@ -90,7 +85,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     /**
      * 办公电话
      */
-    @TableField(value = "fd_work_phone")
     private String fdWorkPhone;
 
     public String getFdWorkPhone() {
@@ -104,7 +98,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     /**
      * 微信号
      */
-    @TableField(value = "fd_wechat_no")
     private String fdWechatNo;
 
     public String getFdWechatNo() {
@@ -118,7 +111,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     /**
      * 性别
      */
-    @TableField(value = "fd_sex")
     private String fdSex;
 
     public String getFdSex() {
@@ -132,7 +124,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     /**
      * 密码
      */
-    @TableField(value = "fd_password")
     private String fdPassword;
 
     public String getFdPassword() {
@@ -146,7 +137,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     /**
      * 上一次修改密码时间
      */
-    @TableField(value = "fd_last_change_pwd")
     private Date fdLastChangePwd;
 
     public Date getFdLastChangePwd() {
@@ -160,7 +150,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     /**
      * 出生年月
      */
-    @TableField(value = "fd_birthday")
     private Date fdBirthday;
 
     public Date getFdBirthday() {
@@ -174,7 +163,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     /**
      * 是否锁定
      */
-    @TableField(value = "fd_is_lock")
     private String fdIsLock;
 
     public String getFdIsLock() {
@@ -191,7 +179,6 @@ public class SysOrgUser extends SysOrgElement implements ISysOrgUser {
     /**
      * 账户锁定时间
      */
-    @TableField(value = "fd_lock_time")
     private Date fdLockTime;
 
     public Date getFdLockTime() {

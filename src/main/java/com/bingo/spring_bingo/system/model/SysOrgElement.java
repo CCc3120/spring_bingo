@@ -3,7 +3,7 @@ package com.bingo.spring_bingo.system.model;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.bingo.spring_bingo.common.constant.SysModelEnum;
-import com.bingo.spring_bingo.common.model.BaseModel;
+import com.bingo.spring_bingo.system.core.model.BaseModel;
 import com.bingo.spring_bingo.system.interfaces.ISysOrgElement;
 import com.bingo.spring_bingo.util.ObjectUtil;
 import com.bingo.spring_bingo.util.StringUtil;

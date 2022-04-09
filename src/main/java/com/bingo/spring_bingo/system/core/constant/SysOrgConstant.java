@@ -1,4 +1,4 @@
-package com.bingo.spring_bingo.common.constant;
+package com.bingo.spring_bingo.system.core.constant;
 
 /**
  * @author bingo

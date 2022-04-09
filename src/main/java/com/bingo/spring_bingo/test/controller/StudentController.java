@@ -1,7 +1,7 @@
 package com.bingo.spring_bingo.test.controller;
 
-import com.bingo.spring_bingo.util.response.AjaxResult;
-import com.bingo.spring_bingo.util.response.AjaxResultFactory;
+import com.bingo.spring_bingo.system.core.response.AjaxResult;
+import com.bingo.spring_bingo.system.core.response.AjaxResultFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

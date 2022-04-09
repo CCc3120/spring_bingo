@@ -1,4 +1,4 @@
-package com.bingo.spring_bingo.util.response;
+package com.bingo.spring_bingo.system.core.response;
 
 import com.bingo.spring_bingo.common.constant.HttpStatusEnum;
 
@@ -14,6 +14,10 @@ public class AjaxResultFactory {
 
     public static AjaxResult success(Object data) {
         return new AjaxResult(HttpStatusEnum.SUCCESS.getCode(), HttpStatusEnum.SUCCESS.getDesc(), data);
+    }
+
+    public static AjaxResult fail() {
+        return new AjaxResult(HttpStatusEnum.FAIL.getCode(), HttpStatusEnum.FAIL.getDesc(), null);
     }
 
     public static AjaxResult error() {

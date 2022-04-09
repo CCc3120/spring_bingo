@@ -1,6 +1,6 @@
 package com.fasterxml.jackson.annotation;
 
-import com.bingo.spring_bingo.common.model.BaseModel;
+import com.bingo.spring_bingo.system.core.model.BaseModel;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
