@@ -28,9 +28,11 @@ public class ArrayUtil {
      * @return
      */
     public static <T> boolean isListIntersect(List<T> list1, List<T> list2) {
-        for (int i = 0; i < list1.size(); i++)
-            if (list2.contains(list1.get(i)))
+        for (int i = 0; i < list1.size(); i++) {
+            if (list2.contains(list1.get(i))) {
                 return true;
+            }
+        }
         return false;
     }
 
@@ -74,12 +76,14 @@ public class ArrayUtil {
      * @param toList
      */
     public static <T> void concatTwoList(List<T> fromList, List<T> toList) {
-        if (fromList == null || toList == null)
+        if (fromList == null || toList == null) {
             return;
+        }
         for (int i = 0; i < fromList.size(); i++) {
             T obj = fromList.get(i);
-            if (!toList.contains(obj))
+            if (!toList.contains(obj)) {
                 toList.add(obj);
+            }
         }
     }
 
@@ -90,8 +94,9 @@ public class ArrayUtil {
      * @return
      */
     public static <T> boolean isEmpty(Collection<T> collection) {
-        if (collection == null)
+        if (collection == null) {
             return true;
+        }
         return collection.isEmpty();
     }
 
@@ -102,8 +107,9 @@ public class ArrayUtil {
      * @return
      */
     public static <T> boolean isEmpty(List<T> list) {
-        if (list == null)
+        if (list == null) {
             return true;
+        }
         return list.isEmpty();
     }
 
@@ -155,6 +161,28 @@ public class ArrayUtil {
                 }
             }
         }
+    }
+
+    /**
+     * 集合根据大小分组
+     *
+     * @param list
+     * @param size
+     * @param <T>
+     * @return
+     */
+    public static <T> List<List<T>> groupBySize(List<T> list, int size) {
+        List<List<T>> rtn = new ArrayList<>();
+        if (list.size() > size) {
+            int groupNum = list.size() / size;
+            for (int i = 0; i < groupNum; i++) {
+                rtn.add(list.subList(i * size, (i + 1) * size));
+            }
+            rtn.add(list.subList(groupNum * size, list.size()));
+        } else {
+            rtn.add(list);
+        }
+        return rtn;
     }
 
     @SuppressWarnings("unchecked")

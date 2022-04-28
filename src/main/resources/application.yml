@@ -55,7 +55,7 @@ spring:
           enabled: true
           merge-sql: true
           log-slow-sql: true
-          slow-sql-millis: 500
+          slow-sql-millis: 1000
         wall:
           # enabled: false #默认值为false，sql防火墙，支持过滤sql，如禁止使用delete *等操作。
           enabled: true

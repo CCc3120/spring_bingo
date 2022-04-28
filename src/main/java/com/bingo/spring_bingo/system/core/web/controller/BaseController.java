@@ -18,10 +18,6 @@ public abstract class BaseController {
         return AjaxResultFactory.success(data);
     }
 
-    protected AjaxResult success(String message) {
-        return AjaxResultFactory.build(HttpStatusEnum.SUCCESS, message);
-    }
-
     protected AjaxResult fail() {
         return AjaxResultFactory.fail();
     }

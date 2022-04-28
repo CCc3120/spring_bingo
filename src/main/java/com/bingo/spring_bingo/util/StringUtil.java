@@ -104,14 +104,14 @@ public class StringUtil {
         return buf.toString();
     }
 
-    public static String join(Iterable iterable, String separator) {
+    public static <T> String join(Iterable<T> iterable, String separator) {
         if (iterable == null) {
             return null;
         }
         return join(iterable.iterator(), separator);
     }
 
-    public static String join(Iterator iterator, String separator) {
+    public static <T> String join(Iterator<T> iterator, String separator) {
         if (iterator == null) {
             return null;
         }

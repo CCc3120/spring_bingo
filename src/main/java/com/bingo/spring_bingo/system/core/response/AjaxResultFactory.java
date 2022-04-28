@@ -28,16 +28,8 @@ public class AjaxResultFactory {
         return new AjaxResult(httpStatusEnum.getCode(), httpStatusEnum.getDesc(), null);
     }
 
-    public static AjaxResult build(HttpStatusEnum httpStatusEnum, String message) {
-        return new AjaxResult(httpStatusEnum.getCode(), message, null);
-    }
-
     public static AjaxResult build(HttpStatusEnum httpStatusEnum, Object data) {
         return new AjaxResult(httpStatusEnum.getCode(), httpStatusEnum.getDesc(), data);
-    }
-
-    public static AjaxResult build(HttpStatusEnum httpStatusEnum, String message, Object data) {
-        return new AjaxResult(httpStatusEnum.getCode(), message, data);
     }
 
     public static AjaxResultProxy build() {
