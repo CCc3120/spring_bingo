@@ -36,4 +36,12 @@ public interface SysOrgMenuMapper extends BaseMapper<SysOrgMenu> {
      * @return
      */
     List<SysOrgMenu> findRoleMenu(String fdRoleId);
+
+    /**
+     * 查询用户所有权限标识
+     *
+     * @param fdUserId
+     * @return
+     */
+    List<String> findMenuAuthMarkByUserId(String fdUserId);
 }

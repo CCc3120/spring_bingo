@@ -89,6 +89,7 @@ public class SysOrgDept extends SysOrgElement implements ISysOrgDept {
         if (fdDeptUser == null) {
             fdDeptUser = new ArrayList<>();
         }
+        // 判断部门领导是否存在,不存在则添加进去
         if (!ObjectUtil.isNull(fdThisLeader)) {
             for (SysOrgUser user : fdDeptUser) {
                 if (user.getFdId().equals(fdThisLeader.getFdId())) {

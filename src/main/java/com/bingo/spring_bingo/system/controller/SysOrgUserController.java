@@ -102,7 +102,7 @@ public class SysOrgUserController extends BaseController {
         user.setFdMobileNo("15243625436");
         user.setFdMemo("这是备注");
         user.setFdOrder(10);
-        sysOrgUserService.save(user);
+        // sysOrgUserService.save(user);
 
         return success();
     }

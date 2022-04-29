@@ -22,6 +22,19 @@ public class SysOrgRole extends SysOrgElement {
     }
 
     /**
+     * 角色权限标识
+     */
+    private String fdAuthMark;
+
+    public String getFdAuthMark() {
+        return fdAuthMark;
+    }
+
+    public void setFdAuthMark(String fdAuthMark) {
+        this.fdAuthMark = fdAuthMark;
+    }
+
+    /**
      * 角色下的权限菜单
      */
     @JsonIgnoreProperties(clazz = SysOrgMenu.class, isShow = true, value = {"fdName"})

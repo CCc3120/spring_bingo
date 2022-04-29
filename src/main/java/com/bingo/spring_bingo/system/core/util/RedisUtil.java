@@ -24,7 +24,8 @@ public class RedisUtil {
     /**
      * 应用前缀
      */
-    public static final String APP_PREFIX = "redis";
+    public static final String APP_PREFIX = "AppName";
+
     /**
      * 缓存名前缀
      */
@@ -34,6 +35,17 @@ public class RedisUtil {
      * 永不过期的缓存名
      */
     public static final String CACHE_NAME_FOREVER = CACHE_NAMES_PREFIX + DECOLLATOR + "forever";
+
+    /**
+     * 验证码 redis key 前缀
+     */
+    public static final String CAPTCHA_CODE_KEY = APP_PREFIX + DECOLLATOR + "user_captcha_code" + DECOLLATOR;
+
+    /**
+     * 登录用户 redis key 前缀
+     */
+    public static final String LOGIN_TOKEN_KEY = APP_PREFIX + DECOLLATOR + "user_login_token" + DECOLLATOR;
+
 
     private static RedisTemplate<String, Object> redisTemplate;
 

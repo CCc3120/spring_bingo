@@ -28,6 +28,7 @@
         <commons-lang3.version>3.4</commons-lang3.version>
         <commons-pool2.version>2.11.1</commons-pool2.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
+        <jjwt.version>0.9.1</jjwt.version>
         <lombok.version>1.18.12</lombok.version>
     </properties>
     <dependencies>
@@ -48,6 +49,13 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+
 
         <!--springboot web-->
         <dependency>

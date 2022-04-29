@@ -11,5 +11,5 @@ public interface ISysUserLoginService {
      *
      * @return
      */
-    String login(String username, String password);
+    String doLogin(String username, String password, String code, String uuid);
 }

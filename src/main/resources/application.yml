@@ -100,7 +100,7 @@ spring:
       name: admin
       password: admin
 
-  #=================================文件上传=================================
+#=================================文件上传=================================
   servlet:
     multipart:
       # 开启 multipart 上传功能
@@ -114,7 +114,19 @@ spring:
       # 最大请求大小
       max-request-size: 215MB
 
-#=================================日志=================================
+#=================================jackson=================================
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    locale: zh
+    default-property-inclusion: non_null
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+      FAIL_ON_EMPTY_BEANS: false
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+
+  #=================================日志=================================
   #Logback：logback-spring.xml, logback-spring.groovy, logback.xml, logback.groovy
   #Log4j：log4j-spring.properties, log4j-spring.xml, log4j.properties, log4j.xml
   #Log4j2：log4j2-spring.xml, log4j2.xml

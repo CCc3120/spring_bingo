@@ -63,4 +63,12 @@
         </include>
         from sys_org_user where sys_org_user.fd_dept_id = #{fdDeptId}
     </select>
+
+    <select id="findByLoginName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="BaseSql">
+            <property name="mark" value="sys_org_user" />
+        </include>
+        from sys_org_user where sys_org_user.fd_login_name = #{loginName}
+    </select>
 </mapper>

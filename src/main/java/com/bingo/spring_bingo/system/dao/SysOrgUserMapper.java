@@ -29,4 +29,11 @@ public interface SysOrgUserMapper extends BaseMapper<SysOrgUser> {
      */
     List<SysOrgUser> findDeptUser(String fdDeptId);
 
+    /**
+     * 根据用户名查询
+     *
+     * @param loginName
+     * @return
+     */
+    SysOrgUser findByLoginName(String loginName);
 }

@@ -1,7 +1,5 @@
 package com.bingo.spring_bingo.system.model;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.bingo.spring_bingo.common.constant.SysModelEnum;
 import com.bingo.spring_bingo.system.core.model.BaseModel;
 import com.bingo.spring_bingo.system.interfaces.ISysOrgElement;
@@ -21,7 +19,6 @@ public abstract class SysOrgElement extends BaseModel implements ISysOrgElement 
     /**
      * 名称
      */
-    @TableField(value = "fd_name")
     private String fdName;
 
     @Override
@@ -36,7 +33,6 @@ public abstract class SysOrgElement extends BaseModel implements ISysOrgElement 
     /**
      * 拼音名
      */
-    @TableField(value = "fd_name_pin_yin")
     private String fdNamePinYin;
 
     public String getFdNamePinYin() {
@@ -50,7 +46,6 @@ public abstract class SysOrgElement extends BaseModel implements ISysOrgElement 
     /**
      * 编号
      */
-    @TableField(value = "fd_no")
     private String fdNo;
 
     @Override
@@ -65,7 +60,6 @@ public abstract class SysOrgElement extends BaseModel implements ISysOrgElement 
     /**
      * 排序号
      */
-    @TableField(value = "fd_order")
     private Integer fdOrder;
 
     @Override
@@ -80,7 +74,6 @@ public abstract class SysOrgElement extends BaseModel implements ISysOrgElement 
     /**
      * 是否可用
      */
-    @TableField(value = "fd_is_available")
     private String fdIsAvailable;
 
     @Override
@@ -98,7 +91,6 @@ public abstract class SysOrgElement extends BaseModel implements ISysOrgElement 
     /**
      * 备注
      */
-    @TableField(value = "fd_memo")
     private String fdMemo;
 
     @Override
@@ -113,7 +105,6 @@ public abstract class SysOrgElement extends BaseModel implements ISysOrgElement 
     /**
      * 创建时间
      */
-    @TableField(value = "fd_create_time")
     private Date fdCreateTime = new Date();
 
     public Date getFdCreateTime() {
@@ -127,7 +118,6 @@ public abstract class SysOrgElement extends BaseModel implements ISysOrgElement 
     /**
      * 修改时间
      */
-    @TableField(value = "fd_alter_time", fill = FieldFill.UPDATE)
     private Date fdAlterTime = new Date();
 
     public Date getFdAlterTime() {

@@ -53,10 +53,8 @@ public abstract class BaseModel implements IBaseModel, Serializable {
                     continue;
                 }
                 methodName = methodList[i].getReturnType().toString();
-                if ((methodName.startsWith("class")
-                        || methodName.startsWith("interface"))
-                        && !(methodName.startsWith("class java.lang.")
-                        || methodName.startsWith("interface java.lang."))) {
+                if ((methodName.startsWith("class") || methodName.startsWith("interface"))
+                        && !(methodName.startsWith("class java.lang.") || methodName.startsWith("interface java.lang."))) {
                     continue;
                 }
                 try {

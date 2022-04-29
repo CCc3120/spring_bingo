@@ -1,16 +1,18 @@
-package com.bingo.spring_bingo.system.core.web.form;
+package com.bingo.spring_bingo.system.core.web.dto;
 
 /**
  * @author bingo
  * @date 2022-04-11 14:43
  */
-public class SysLoginForm {
+public class SysLoginDto {
 
     private String username;
 
     private String password;
 
     private String code;
+
+    private String uuid;
 
     public String getUsername() {
         return username;
@@ -34,5 +36,13 @@ public class SysLoginForm {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

@@ -10,7 +10,7 @@ public enum SysModelEnum {
 
     SEX_MAN("M", "男"),
     SEX_WOMAN("W", "女"),
-    SEX_NO("NO", "未知");
+    SEX_UNKNOW("U", "未知");
 
 
     private String code;

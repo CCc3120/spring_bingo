@@ -30,7 +30,7 @@ class SpringBingoApplicationTests {
         // user.setFdWorkPhone("8316800===");
         // user.setFdMobileNo("15243625436");
         // sysOrgUserService.save(user);
-        sysOrgUserService.update().set("fd_login_name","15243625436").eq("fd_id", "17fbf0c9426c775845e79544b5883ecf").update();
+        // sysOrgUserService.update().set("fd_login_name","15243625436").eq("fd_id", "17fbf0c9426c775845e79544b5883ecf").update();
     }
 
     @Test

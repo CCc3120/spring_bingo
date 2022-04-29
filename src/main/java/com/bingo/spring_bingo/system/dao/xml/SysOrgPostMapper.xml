@@ -31,7 +31,8 @@
         <include refid="BaseSql">
             <property name="mark" value="sys_org_post" />
         </include>
-        from sys_org_post, user_post
-        where sys_org_post.fd_id = user_post.fd_post_id and user_post.fd_user_id = #{fdUserId}
+        from sys_org_post
+            left join user_post on sys_org_post.fd_id = user_post.fd_post_id
+        where user_post.fd_user_id = #{fdUserId}
     </select>
 </mapper>
