@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
 /**
+ * 角色
+ *
  * @author bingo
  * @date 2022-03-25 15:04
  */

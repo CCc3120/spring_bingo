@@ -36,7 +36,7 @@ public class AjaxResultProxy {
         return this;
     }
 
-    public AjaxResult get() {
+    public AjaxResult result() {
         return new AjaxResult(this.code, this.message, this.data);
     }
 }

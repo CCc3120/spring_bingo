@@ -71,4 +71,211 @@
         </include>
         from sys_org_user where sys_org_user.fd_login_name = #{loginName}
     </select>
+
+    <insert id="insert" parameterType="com.bingo.spring_bingo.system.model.SysOrgUser">
+        insert into sys_org_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fdId != null and fdId !=''">
+                fd_id,
+            </if>
+            <if test="fdName != null and fdName !=''">
+                fd_name,
+            </if>
+            <if test="fdNamePinYin != null and fdNamePinYin !=''">
+                fd_name_pin_yin,
+            </if>
+            <if test="fdNo != null and fdNo !=''">
+                fd_no,
+            </if>
+            <if test="fdOrder != null">
+                fd_order,
+            </if>
+            <if test="fdIsAvailable != null and fdIsAvailable !=''">
+                fd_is_available,
+            </if>
+            <if test="fdMemo != null and fdMemo !=''">
+                fd_memo,
+            </if>
+            <if test="fdCreateTime != null">
+                fd_create_time,
+            </if>
+            <if test="fdAlterTime != null">
+                fd_alter_time,
+            </if>
+            <if test="fdEmail != null and fdEmail !=''">
+                fd_email,
+            </if>
+            <if test="fdMobileNo != null and fdMobileNo !=''">
+                fd_mobile_no,
+            </if>
+            <if test="fdLoginName != null and fdLoginName !=''">
+                fd_login_name,
+            </if>
+            <if test="fdNickName != null and fdNickName !=''">
+                fd_nick_name,
+            </if>
+            <if test="fdWorkPhone != null and fdWorkPhone !=''">
+                fd_work_phone,
+            </if>
+            <if test="fdWechatNo != null and fdWechatNo !=''">
+                fd_wechat_no,
+            </if>
+            <if test="fdSex != null and fdSex !=''">
+                fd_sex,
+            </if>
+            <if test="fdPassword != null and fdPassword !=''">
+                fd_password,
+            </if>
+            <if test="fdLastChangePwd != null">
+                fd_last_change_pwd,
+            </if>
+            <if test="fdBirthday != null">
+                fd_birthday,
+            </if>
+            <if test="fdIsLock != null and fdIsLock !=''">
+                fd_is_lock,
+            </if>
+            <if test="fdLockTime != null">
+                fd_lock_time,
+            </if>
+            <if test="fdUserDept != null">
+                fd_dept_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fdId != null and fdId !=''">
+                #{fdId},
+            </if>
+            <if test="fdName != null and fdName !=''">
+                #{fdName},
+            </if>
+            <if test="fdNamePinYin != null and fdNamePinYin !=''">
+                #{fdNamePinYin},
+            </if>
+            <if test="fdNo != null and fdNo !=''">
+                #{fdNo},
+            </if>
+            <if test="fdOrder != null">
+                #{fdOrder},
+            </if>
+            <if test="fdIsAvailable != null and fdIsAvailable !=''">
+                #{fdIsAvailable},
+            </if>
+            <if test="fdMemo != null and fdMemo !=''">
+                #{fdMemo},
+            </if>
+            <if test="fdCreateTime != null">
+                #{fdCreateTime},
+            </if>
+            <if test="fdAlterTime != null">
+                #{fdAlterTime},
+            </if>
+            <if test="fdEmail != null and fdEmail !=''">
+                #{fdEmail},
+            </if>
+            <if test="fdMobileNo != null and fdMobileNo !=''">
+                #{fdMobileNo},
+            </if>
+            <if test="fdLoginName != null and fdLoginName !=''">
+                #{fdLoginName},
+            </if>
+            <if test="fdNickName != null and fdNickName !=''">
+                #{fdNickName},
+            </if>
+            <if test="fdWorkPhone != null and fdWorkPhone !=''">
+                #{fdWorkPhone},
+            </if>
+            <if test="fdWechatNo != null and fdWechatNo !=''">
+                #{fdWechatNo},
+            </if>
+            <if test="fdSex != null and fdSex !=''">
+                #{fdSex},
+            </if>
+            <if test="fdPassword != null and fdPassword !=''">
+                #{fdPassword},
+            </if>
+            <if test="fdLastChangePwd != null">
+                #{fdLastChangePwd},
+            </if>
+            <if test="fdBirthday != null">
+                #{fdBirthday},
+            </if>
+            <if test="fdIsLock != null and fdIsLock !=''">
+                #{fdIsLock},
+            </if>
+            <if test="fdLockTime != null">
+                #{fdLockTime},
+            </if>
+            <if test="fdUserDept != null">
+                #{fdUserDept.fdId},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.bingo.spring_bingo.system.model.SysOrgUser">
+        update sys_org_user
+        <set>
+            <if test="fdName != null and fdName !=''">
+                fd_name = #{fdName},
+            </if>
+            <if test="fdNamePinYin != null and fdNamePinYin !=''">
+                fd_name_pin_yin = #{fdNamePinYin},
+            </if>
+            <if test="fdNo != null and fdNo !=''">
+                fd_no = #{fdNo},
+            </if>
+            <if test="fdOrder != null">
+                fd_order = #{fdOrder},
+            </if>
+            <if test="fdIsAvailable != null and fdIsAvailable !=''">
+                fd_is_available = #{fdIsAvailable},
+            </if>
+            <if test="fdMemo != null and fdMemo !=''">
+                fd_memo = #{fdMemo},
+            </if>
+            <if test="fdAlterTime != null">
+                fd_alter_time = #{fdAlterTime},
+            </if>
+            <if test="fdEmail != null and fdEmail !=''">
+                fd_email = #{fdEmail},
+            </if>
+            <if test="fdMobileNo != null and fdMobileNo !=''">
+                fd_mobile_no = #{fdMobileNo},
+            </if>
+            <if test="fdLoginName != null and fdLoginName !=''">
+                fd_login_name = #{fdLoginName},
+            </if>
+            <if test="fdNickName != null and fdNickName !=''">
+                fd_nick_name = #{fdNickName},
+            </if>
+            <if test="fdWorkPhone != null and fdWorkPhone !=''">
+                fd_work_phone = #{fdWorkPhone},
+            </if>
+            <if test="fdWechatNo != null and fdWechatNo !=''">
+                fd_wechat_no = #{fdWechatNo},
+            </if>
+            <if test="fdSex != null and fdSex !=''">
+                fd_sex = #{fdSex},
+            </if>
+            <if test="fdPassword != null and fdPassword !=''">
+                fd_password = #{fdPassword},
+            </if>
+            <if test="fdLastChangePwd != null">
+                fd_last_change_pwd = #{fdLastChangePwd},
+            </if>
+            <if test="fdBirthday != null">
+                fd_birthday = #{fdBirthday},
+            </if>
+            <if test="fdIsLock != null and fdIsLock !=''">
+                fd_is_lock = #{fdIsLock},
+            </if>
+            <if test="fdLockTime != null">
+                fd_lock_time = #{fdLockTime},
+            </if>
+            <if test="fdUserDept != null">
+                fd_dept_id = #{fdUserDept.fdId},
+            </if>
+        </set>
+        where fd_id = #{fdId}
+    </update>
 </mapper>

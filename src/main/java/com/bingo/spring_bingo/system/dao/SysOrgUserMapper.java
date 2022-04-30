@@ -14,6 +14,22 @@ import java.util.List;
 public interface SysOrgUserMapper extends BaseMapper<SysOrgUser> {
 
     /**
+     * 新增
+     *
+     * @param sysOrgUser
+     * @return
+     */
+    int insert(SysOrgUser sysOrgUser);
+
+    /**
+     * 修改
+     *
+     * @param sysOrgUser
+     * @return
+     */
+    int updateById(SysOrgUser sysOrgUser);
+
+    /**
      * 主键查询
      *
      * @param primaryKey

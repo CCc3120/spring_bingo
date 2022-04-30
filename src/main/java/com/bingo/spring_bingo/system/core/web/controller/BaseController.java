@@ -25,4 +25,9 @@ public abstract class BaseController {
     protected AjaxResult fail(String message) {
         return AjaxResultFactory.build(HttpStatusEnum.FAIL, message);
     }
+
+    protected AjaxResult error() {
+        return AjaxResultFactory.error();
+    }
+
 }
