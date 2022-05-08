@@ -1,6 +1,8 @@
 package com.bingo.spring_bingo.system.core.web.service.spring;
 
+import com.bingo.spring_bingo.system.core.security.UserTokenService;
 import com.bingo.spring_bingo.system.core.util.RedisUtil;
+import com.bingo.spring_bingo.system.core.web.model.SysLoginUser;
 import com.bingo.spring_bingo.system.core.web.service.ISysUserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,17 +23,19 @@ public class SysUserLoginServiceImpl implements ISysUserLoginService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private UserTokenService userTokenService;
+
     @Override
     public String doLogin(String username, String password, String code, String uuid) {
 
-        validateCode(username, code, uuid);
+        // validateCode(username, code, uuid);
 
         Authentication authentication = null;
         try {
             // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
             authentication =
-                    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,
-                            password));
+                    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (Exception e) {
             if (e instanceof BadCredentialsException) {
                 System.out.println("账号密码错误");
@@ -43,9 +47,8 @@ public class SysUserLoginServiceImpl implements ISysUserLoginService {
         }
 
         // 登录验证通过的信息
-        Object loginUser = authentication.getPrincipal();
-
-        return null;
+        SysLoginUser loginUser = (SysLoginUser) authentication.getPrincipal();
+        return userTokenService.createToken(loginUser);
     }
 
     // 验证登录验证码

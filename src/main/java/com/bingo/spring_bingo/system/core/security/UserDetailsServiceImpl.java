@@ -1,6 +1,7 @@
-package com.bingo.spring_bingo.system.core.web.service.spring;
+package com.bingo.spring_bingo.system.core.security;
 
 import com.bingo.spring_bingo.common.constant.SysModelEnum;
+import com.bingo.spring_bingo.system.core.web.model.SysLoginUser;
 import com.bingo.spring_bingo.system.model.SysOrgUser;
 import com.bingo.spring_bingo.system.service.ISysOrgMenuService;
 import com.bingo.spring_bingo.system.service.ISysOrgUserService;
@@ -9,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 /**
  * @author bingo
@@ -39,9 +42,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new RuntimeException("账户已锁定");
         }
 
-        // 用户所有菜单权限
-        sysOrgMenuService.findMenuAuthMarkByUser(user);
-
-        return null;
+        return createLoginUser(user);
     }
+
+    private UserDetails createLoginUser(SysOrgUser user) {
+        SysLoginUser loginUser = new SysLoginUser();
+        // 用户所有菜单权限
+        Set<String> authMark = sysOrgMenuService.findMenuAuthMarkByUser(user);
+        loginUser.setUser(user);
+        loginUser.setAuthmarks(authMark);
+        return loginUser;
+    }
+
 }

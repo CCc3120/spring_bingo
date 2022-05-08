@@ -180,4 +180,22 @@ public class StringUtil {
             return null;
         }
     }
+
+    /**
+     * 是否包含字符串
+     *
+     * @param str  验证字符串
+     * @param strs 字符串组
+     * @return 包含返回true
+     */
+    public static boolean inStringIgnoreCase(String str, String... strs) {
+        if (StringUtil.isNotNull(str) && !ObjectUtil.isNull(strs)) {
+            for (String s : strs) {
+                if (str.equalsIgnoreCase(s.trim())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

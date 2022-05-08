@@ -156,3 +156,13 @@ mybatis-plus:
 #      id-type: assign_uuid
       logic-delete-value: N
       logic-not-delete-value: Y
+
+
+#=================================token配置=================================
+token:
+  # 令牌自定义标识
+  header: Authorization
+  # 令牌密钥
+  secret: irjusdnjkaskjr2=psdkig%uhd
+  # 令牌有效期（默认30分钟）
+  expireTime: 20

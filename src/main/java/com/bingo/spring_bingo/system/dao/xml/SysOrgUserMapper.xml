@@ -36,7 +36,7 @@
         <collection property="fdUserPost" column="fd_id" fetchType="lazy"
                     javaType="java.util.ArrayList"
                     ofType="com.bingo.spring_bingo.system.model.SysOrgPost"
-                    select="com.bingo.spring_bingo.system.model.SysOrgPost.findUserPost"></collection>
+                    select="com.bingo.spring_bingo.system.dao.SysOrgPostMapper.findUserPost"></collection>
     </resultMap>
 
     <sql id="BaseSql">

@@ -2,6 +2,7 @@ package com.bingo.spring_bingo.system.core.web.model;
 
 import com.bingo.spring_bingo.common.constant.SysModelEnum;
 import com.bingo.spring_bingo.system.model.SysOrgUser;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,7 +13,7 @@ import java.util.Set;
  * @author bingo
  * @date 2022-04-29 15:31
  */
-public class SysLoginUser extends SysOrgUser implements UserDetails {
+public class SysLoginUser implements UserDetails {
 
     /**
      * 用户唯一标识
@@ -32,7 +33,7 @@ public class SysLoginUser extends SysOrgUser implements UserDetails {
     /**
      * 登录IP地址
      */
-    private String ipaddr;
+    private String ipAddr;
 
     /**
      * 登录地点
@@ -53,6 +54,12 @@ public class SysLoginUser extends SysOrgUser implements UserDetails {
      * 权限列表
      */
     private Set<String> authmarks;
+
+    /**
+     * 用户信息
+     */
+    @JsonIgnoreProperties(clazz = SysOrgUser.class, isShow = true, value = {"fdName"})
+    private SysOrgUser user;
 
     public String getToken() {
         return token;
@@ -78,12 +85,20 @@ public class SysLoginUser extends SysOrgUser implements UserDetails {
         this.expireTime = expireTime;
     }
 
-    public String getIpaddr() {
-        return ipaddr;
+    public String getIpAddr() {
+        return ipAddr;
     }
 
-    public void setIpaddr(String ipaddr) {
-        this.ipaddr = ipaddr;
+    public void setIpAddr(String ipAddr) {
+        this.ipAddr = ipAddr;
+    }
+
+    public SysOrgUser getUser() {
+        return user;
+    }
+
+    public void setUser(SysOrgUser user) {
+        this.user = user;
     }
 
     public String getLoginLocation() {
@@ -125,12 +140,12 @@ public class SysLoginUser extends SysOrgUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return getFdPassword();
+        return user.getFdPassword();
     }
 
     @Override
     public String getUsername() {
-        return getFdLoginName();
+        return user.getFdLoginName();
     }
 
     /**
@@ -146,7 +161,7 @@ public class SysLoginUser extends SysOrgUser implements UserDetails {
      */
     @Override
     public boolean isAccountNonLocked() {
-        return getFdIsLock().equals(SysModelEnum.BOOLEAN_NO.getCode());
+        return user.getFdIsLock().equals(SysModelEnum.BOOLEAN_NO.getCode());
     }
 
     /**
@@ -162,6 +177,6 @@ public class SysLoginUser extends SysOrgUser implements UserDetails {
      */
     @Override
     public boolean isEnabled() {
-        return getFdIsAvailable().equals(SysModelEnum.BOOLEAN_YES.getCode());
+        return user.getFdIsAvailable().equals(SysModelEnum.BOOLEAN_YES.getCode());
     }
 }

@@ -17,6 +17,7 @@ import java.util.Map;
  * @date 2022-04-11 14:29
  */
 @RestController
+@RequestMapping(value = "/sys")
 public class SysUserLoginController extends BaseController {
 
     @Autowired
@@ -28,6 +29,6 @@ public class SysUserLoginController extends BaseController {
         String token = sysUserLoginService.doLogin(dto.getUsername(), dto.getPassword(), dto.getCode(),
                 dto.getUuid());
         map.put("token", token);
-        return success(token);
+        return success(map);
     }
 }

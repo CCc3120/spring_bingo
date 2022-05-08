@@ -13,7 +13,7 @@ public interface ISysOrgMenuService {
     /**
      * 查询用户所有权限
      *
-     * @param fdId
+     * @param sysOrgUser
      * @return
      */
     Set<String> findMenuAuthMarkByUser(SysOrgUser sysOrgUser);

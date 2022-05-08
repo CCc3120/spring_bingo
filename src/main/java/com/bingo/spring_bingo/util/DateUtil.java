@@ -12,6 +12,21 @@ import java.util.Date;
  * @date 2022-03-24 16:59
  */
 public class DateUtil {
+
+    public static final long SECOND = 1000;
+
+    public static final long MINUTE = SECOND * 60;
+
+    public static final long HOUR = MINUTE * 60;
+
+    public static final long DAY = HOUR * 24;
+
+    public static final long WEEK = DAY * 7;
+
+    public static final long MONTH = DAY * 30;
+
+    public static final long YEAR = DAY * 365;
+
     public static String PATTERN_YYYY_MM = "yyyy-MM";
 
     public static String PATTERN_YYYY_MM_DD = "yyyy-MM-dd";

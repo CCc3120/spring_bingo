@@ -1,5 +1,6 @@
 package com.bingo.spring_bingo.system.service.spring;
 
+import com.bingo.spring_bingo.system.core.constant.SysConstant;
 import com.bingo.spring_bingo.system.dao.SysOrgMenuMapper;
 import com.bingo.spring_bingo.system.model.SysOrgUser;
 import com.bingo.spring_bingo.system.service.ISysOrgMenuService;
@@ -28,12 +29,12 @@ public class SysOrgMenuServiceImpl implements ISysOrgMenuService {
     public Set<String> findMenuAuthMarkByUser(SysOrgUser sysOrgUser) {
         List<String> authMarkList = sysOrgMenuMapper.findMenuAuthMarkByUserId(sysOrgUser.getFdId());
         Set<String> authMarkSet = new HashSet<>();
-        if ("admin".equals(sysOrgUser.getFdLoginName())) {
-            authMarkSet.add("*:*:*");
+        if (SysConstant.ADMIN_ACCT.equals(sysOrgUser.getFdLoginName())) {
+            authMarkSet.add(SysConstant.ADMIN_AUTH);
         } else {
             authMarkList.forEach(s -> {
                 if (StringUtil.isNotNull(s)) {
-                    authMarkSet.addAll(Arrays.asList(s.trim().split(";")));
+                    authMarkSet.addAll(Arrays.asList(s.trim().split(SysConstant.SEPAR_SEMICOLON)));
                 }
             });
         }
