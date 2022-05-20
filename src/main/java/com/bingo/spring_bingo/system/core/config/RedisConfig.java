@@ -3,6 +3,7 @@ package com.bingo.spring_bingo.system.core.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import org.springframework.cache.CacheManager;
@@ -48,6 +49,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         // 设置出现故障即错误的类型，第一个是指验证程序，此时的参数为无需验证，其他参数可以查看源码了解，第二是指该类不能为final修饰，否则将会报错
         // mapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
         mapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         jacksonSeial.setObjectMapper(mapper);
 

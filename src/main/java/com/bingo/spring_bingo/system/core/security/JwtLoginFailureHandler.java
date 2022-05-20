@@ -2,6 +2,7 @@ package com.bingo.spring_bingo.system.core.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,8 @@ import java.io.IOException;
  * @author bingo
  * @date 2022-04-29 10:58
  */
-public class LoginFailureHandlerImpl implements AuthenticationFailureHandler {
+@Component
+public class JwtLoginFailureHandler implements AuthenticationFailureHandler {
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,

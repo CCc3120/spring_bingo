@@ -49,8 +49,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         SysLoginUser loginUser = new SysLoginUser();
         // 用户所有菜单权限
         Set<String> authMark = sysOrgMenuService.findMenuAuthMarkByUser(user);
-        loginUser.setUser(user);
         loginUser.setAuthmarks(authMark);
+
+        loginUser.setFdUserId(user.getFdId());
+        loginUser.setFdUsername(user.getFdLoginName());
+        loginUser.setFdPassword(user.getFdPassword());
         return loginUser;
     }
 

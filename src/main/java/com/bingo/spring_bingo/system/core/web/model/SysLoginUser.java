@@ -1,8 +1,6 @@
 package com.bingo.spring_bingo.system.core.web.model;
 
-import com.bingo.spring_bingo.common.constant.SysModelEnum;
-import com.bingo.spring_bingo.system.model.SysOrgUser;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,6 +12,8 @@ import java.util.Set;
  * @date 2022-04-29 15:31
  */
 public class SysLoginUser implements UserDetails {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 用户唯一标识
@@ -56,10 +56,17 @@ public class SysLoginUser implements UserDetails {
     private Set<String> authmarks;
 
     /**
-     * 用户信息
+     * 用户id
      */
-    @JsonIgnoreProperties(clazz = SysOrgUser.class, isShow = true, value = {"fdName"})
-    private SysOrgUser user;
+    private String fdUserId;
+
+    private String fdUsername;
+    private String fdPassword;
+
+    private Boolean isAccountNonExpired = Boolean.TRUE;
+    private Boolean isAccountNonLocked = Boolean.TRUE;
+    private Boolean isCredentialsNonExpired = Boolean.TRUE;
+    private Boolean isEnabled = Boolean.TRUE;
 
     public String getToken() {
         return token;
@@ -91,14 +98,6 @@ public class SysLoginUser implements UserDetails {
 
     public void setIpAddr(String ipAddr) {
         this.ipAddr = ipAddr;
-    }
-
-    public SysOrgUser getUser() {
-        return user;
-    }
-
-    public void setUser(SysOrgUser user) {
-        this.user = user;
     }
 
     public String getLoginLocation() {
@@ -133,6 +132,63 @@ public class SysLoginUser implements UserDetails {
         this.authmarks = authmarks;
     }
 
+    public String getFdUserId() {
+        return fdUserId;
+    }
+
+    public void setFdUserId(String fdUserId) {
+        this.fdUserId = fdUserId;
+    }
+
+    public String getFdUsername() {
+        return fdUsername;
+    }
+
+    public void setFdUsername(String fdUsername) {
+        this.fdUsername = fdUsername;
+    }
+
+    public String getFdPassword() {
+        return fdPassword;
+    }
+
+    public void setFdPassword(String fdPassword) {
+        this.fdPassword = fdPassword;
+    }
+
+    public Boolean getAccountNonExpired() {
+        return isAccountNonExpired;
+    }
+
+    public void setAccountNonExpired(Boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
+    public Boolean getAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    public void setAccountNonLocked(Boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    public Boolean getCredentialsNonExpired() {
+        return isCredentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
+    }
+
+    public Boolean getEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        isEnabled = enabled;
+    }
+
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -140,43 +196,48 @@ public class SysLoginUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getFdPassword();
+        return fdPassword;
     }
 
+    @JsonIgnore
     @Override
     public String getUsername() {
-        return user.getFdLoginName();
+        return fdUsername;
     }
 
     /**
      * 账户是否未过期,过期无法验证
      */
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return isAccountNonExpired;
     }
 
     /**
      * 指定用户是否解锁,锁定的用户无法进行身份验证
      */
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
-        return user.getFdIsLock().equals(SysModelEnum.BOOLEAN_NO.getCode());
+        return isAccountNonLocked;
     }
 
     /**
      * 指示是否已未过期的用户的凭据(密码),过期的凭据防止认证
      */
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return isCredentialsNonExpired;
     }
 
     /**
      * 是否可用 ,禁用的用户不能身份验证
      */
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
-        return user.getFdIsAvailable().equals(SysModelEnum.BOOLEAN_YES.getCode());
+        return isEnabled;
     }
 }

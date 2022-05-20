@@ -54,8 +54,7 @@ public class UserTokenService {
                 // 解析对应的权限以及用户信息
                 String uuid = (String) claims.get(SysConstant.LOGIN_USER_KEY);
                 String userKey = getTokenKey(uuid);
-                SysLoginUser user = RedisUtil.getCacheObject(userKey);
-                return user;
+                return RedisUtil.getCacheObject(userKey);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -100,15 +99,15 @@ public class UserTokenService {
     }
 
     /**
-     * 验证令牌有效期，相差不足20分钟，自动刷新缓存
+     * 验证令牌有效期，相差不足 1/5 的令牌有效时间，自动刷新缓存
      *
      * @param loginUser
      * @return 令牌
      */
     public void verifyToken(SysLoginUser loginUser) {
-        long expireTime = loginUser.getExpireTime();
+        long userExpireTime = loginUser.getExpireTime();
         long currentTime = System.currentTimeMillis();
-        if (expireTime - currentTime <= expireTime * DateUtil.MINUTE) {
+        if (userExpireTime - currentTime <= (expireTime / 5) * DateUtil.MINUTE) {
             refreshToken(loginUser);
         }
     }

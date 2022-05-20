@@ -1,9 +1,6 @@
 package com.bingo.spring_bingo.common.security;
 
-import com.bingo.spring_bingo.system.core.security.JwtAuthenticationTokenFilter;
-import com.bingo.spring_bingo.system.core.security.LoginFailureHandlerImpl;
-import com.bingo.spring_bingo.system.core.security.LoginSuccessHandlerImpl;
-import com.bingo.spring_bingo.system.core.security.LogoutSuccessHandlerImpl;
+import com.bingo.spring_bingo.system.core.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -30,11 +27,19 @@ import java.util.List;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true) //开启方法权限注解
 public class SysSpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    /**
-     * token认证过滤器
-     */
+
     @Autowired
-    private JwtAuthenticationTokenFilter authenticationTokenFilter;
+    private JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    @Autowired
+    private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+    @Autowired
+    private JwtLoginFailureHandler jwtLoginFailureHandler;
+    @Autowired
+    private JwtLoginSuccessHandler jwtLoginSuccessHandler;
+    @Autowired
+    private JwtLogoutSuccessHandler jwtLogoutSuccessHandler;
 
     /**
      * 跨域过滤器
@@ -61,8 +66,7 @@ public class SysSpringSecurityConfig extends WebSecurityConfigurerAdapter {
      * 强散列哈希加密实现
      */
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder()
-    {
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -70,9 +74,7 @@ public class SysSpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         List<String> ignoreUrl = new ArrayList<>();
 
-
         List<String> anonymousUrl = new ArrayList<>();
-        anonymousUrl.add("/sys/login");
 
         http
                 .cors((cors) -> {
@@ -92,26 +94,26 @@ public class SysSpringSecurityConfig extends WebSecurityConfigurerAdapter {
                         formLogin
                                 // .authenticationDetailsSource(authenticationDetailsSource)
                                 // .loginPage("/intologin")
-                                // .loginProcessingUrl("/login")
-                                // .permitAll()
+                                .loginProcessingUrl("/sys/login")
+                                .permitAll()
                                 // 登录成功处理
-                                .successHandler(new LoginSuccessHandlerImpl())
+                                .successHandler(jwtLoginSuccessHandler)
                                 // 登录失败处理
-                                .failureHandler(new LoginFailureHandlerImpl())
+                                .failureHandler(jwtLoginFailureHandler)
 
                 )
                 .logout((logout) ->
                         logout
-                                .logoutUrl("/logout")
+                                .logoutUrl("/sys/logout")
                                 // 退出成功处理
-                                .logoutSuccessHandler(new LogoutSuccessHandlerImpl())
+                                .logoutSuccessHandler(jwtLogoutSuccessHandler)
                 )
                 .exceptionHandling((exceptionHandling) ->
                                 // 异常处理
                                 exceptionHandling
-                                        // .authenticationEntryPoint(null)
-                                        .accessDeniedPage("/")
-                        // .accessDeniedHandler(null)
+                                        .accessDeniedHandler(jwtAccessDeniedHandler)
+                                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                        // .accessDeniedPage("/")
                 )
                 // 禁用请求头
                 .headers(AbstractHttpConfigurer::disable)
@@ -121,7 +123,7 @@ public class SysSpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf(AbstractHttpConfigurer::disable)
         ;
         // 添加JWT filter
-        http.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         // 添加CORS filter
         // http.addFilterBefore(corsFilter, JwtAuthenticationTokenFilter.class);
         // http.addFilterBefore(corsFilter, LogoutFilter.class);
