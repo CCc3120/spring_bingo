@@ -1,6 +1,7 @@
 package com.bingo.spring_bingo.system.core.response;
 
 import com.bingo.spring_bingo.common.constant.HttpStatusEnum;
+import org.springframework.util.Assert;
 
 /**
  * @author bingo
@@ -13,26 +14,64 @@ public class AjaxResultFactory {
     }
 
     public static AjaxResult success(Object data) {
-        return new AjaxResultProxy(HttpStatusEnum.SUCCESS.getCode(), HttpStatusEnum.SUCCESS.getDesc(), data).result();
+        return new AjaxResultBuild(HttpStatusEnum.SUCCESS.getCode(), HttpStatusEnum.SUCCESS.getDesc(), data).result();
     }
 
     public static AjaxResult fail() {
-        return new AjaxResultProxy(HttpStatusEnum.FAIL.getCode(), HttpStatusEnum.FAIL.getDesc(), null).result();
+        return new AjaxResultBuild(HttpStatusEnum.FAIL.getCode(), HttpStatusEnum.FAIL.getDesc(), null).result();
     }
 
     public static AjaxResult error() {
-        return new AjaxResultProxy(HttpStatusEnum.ERROR.getCode(), HttpStatusEnum.ERROR.getDesc(), null).result();
+        return new AjaxResultBuild(HttpStatusEnum.ERROR.getCode(), HttpStatusEnum.ERROR.getDesc(), null).result();
     }
 
     public static AjaxResult build(HttpStatusEnum httpStatusEnum) {
-        return new AjaxResultProxy(httpStatusEnum.getCode(), httpStatusEnum.getDesc(), null).result();
+        return new AjaxResultBuild(httpStatusEnum.getCode(), httpStatusEnum.getDesc(), null).result();
     }
 
     public static AjaxResult build(HttpStatusEnum httpStatusEnum, Object data) {
-        return new AjaxResultProxy(httpStatusEnum.getCode(), httpStatusEnum.getDesc(), data).result();
+        return new AjaxResultBuild(httpStatusEnum.getCode(), httpStatusEnum.getDesc(), data).result();
     }
 
-    public static AjaxResultProxy build() {
-        return new AjaxResultProxy();
+    public static AjaxResultBuild build() {
+        return new AjaxResultBuild();
+    }
+
+    public static class AjaxResultBuild {
+        private String code;
+
+        private String message;
+
+        private Object data;
+
+        protected AjaxResultBuild() {
+        }
+
+        protected AjaxResultBuild(String code, String message, Object data) {
+            this.code = code;
+            this.message = message;
+            this.data = data;
+        }
+
+        public AjaxResultBuild code(String code) {
+            this.code = code;
+            return this;
+        }
+
+        public AjaxResultBuild message(String message) {
+            this.message = message;
+            return this;
+        }
+
+        public AjaxResultBuild data(Object data) {
+            this.data = data;
+            return this;
+        }
+
+        public AjaxResult result() {
+            Assert.hasLength(this.code, "status code is not null");
+            return new AjaxResult(this.code, this.message, this.data);
+        }
     }
 }
+

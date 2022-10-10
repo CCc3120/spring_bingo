@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public AjaxResult exception(Exception e, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
-        logger.error("请求地址'{}'，发生系统异常。", requestURI, e);
+        logger.error(String.format("请求地址'%s'，发生系统异常。", requestURI), e);
         return AjaxResultFactory.error();
     }
 }

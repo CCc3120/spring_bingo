@@ -1,5 +1,7 @@
 package com.bingo.spring_bingo.util;
 
+import com.bingo.spring_bingo.system.core.util.ThreadUtil;
+
 import java.util.*;
 
 /**
@@ -173,14 +175,19 @@ public class ArrayUtil {
      */
     public static <T> List<List<T>> groupBySize(List<T> list, int size) {
         List<List<T>> rtn = new ArrayList<>();
-        if (list.size() > size) {
-            int groupNum = list.size() / size;
-            for (int i = 0; i < groupNum; i++) {
+        int groupNum;
+        if ((list.size() % size) == 0) {
+            groupNum = list.size() / size;
+        } else {
+            groupNum = (list.size() / size) + 1;
+        }
+
+        for (int i = 0; i < groupNum; i++) {
+            if (i == (groupNum - 1)) {
+                rtn.add(list.subList(i * size, list.size()));
+            } else {
                 rtn.add(list.subList(i * size, (i + 1) * size));
             }
-            rtn.add(list.subList(groupNum * size, list.size()));
-        } else {
-            rtn.add(list);
         }
         return rtn;
     }
@@ -192,5 +199,17 @@ public class ArrayUtil {
         } else {
             return Arrays.asList(arr);
         }
+    }
+
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.add("d");
+        list.add("e");
+        List<List<String>> lists = groupBySize(list, 2);
+        boolean b = ThreadUtil.groupHandle(lists, System.out::println);
+        System.out.println(b);
     }
 }

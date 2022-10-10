@@ -27,20 +27,18 @@ public class ThreadUtil {
     }
 
     /**
-     * 数据分组处理
+     * 数据并行处理
      *
      * @param list
      * @param handle
      * @param <T>
      */
-    public static <T> boolean groupHandle(List<List<T>> list, ThreadGroupHandle<T> handle) {
+    public static <T> boolean groupHandle(List<T> list, ThreadHandle handle) {
         CountDownLatch downLatch = new CountDownLatch(list.size());
-        for (List<T> ts : list) {
-            ThreadPoolUtil.singleton().getThreadPoolExecutor().execute(() -> {
-                handle.groupHandle(ts);
-                downLatch.countDown();
-            });
-        }
+        list.forEach(t -> new Thread(() -> {
+            handle.handle(t);
+            downLatch.countDown();
+        }).start());
         try {
             downLatch.await();
             return true;
