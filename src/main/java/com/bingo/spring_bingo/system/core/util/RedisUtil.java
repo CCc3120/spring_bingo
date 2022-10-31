@@ -1,6 +1,7 @@
 package com.bingo.spring_bingo.system.core.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,9 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class RedisUtil {
+
+    @Value("${spring.application.name}")
+    private String applicationName;
 
     /**
      * 分割符

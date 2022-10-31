@@ -25,7 +25,7 @@ import java.util.List;
  */
 @EnableWebSecurity(debug = false)
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true) //开启方法权限注解
-public class SysSpringSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SysSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
@@ -73,6 +73,7 @@ public class SysSpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         List<String> ignoreUrl = new ArrayList<>();
+        ignoreUrl.add("/student/*");
 
         List<String> anonymousUrl = new ArrayList<>();
 

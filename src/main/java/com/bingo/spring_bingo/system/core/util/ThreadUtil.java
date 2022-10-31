@@ -33,7 +33,7 @@ public class ThreadUtil {
      * @param handle
      * @param <T>
      */
-    public static <T> boolean groupHandle(List<T> list, ThreadHandle handle) {
+    public static <T> ProcessResult<String> groupHandle(List<T> list, ThreadHandle handle) {
         CountDownLatch downLatch = new CountDownLatch(list.size());
         list.forEach(t -> new Thread(() -> {
             handle.handle(t);
@@ -41,10 +41,10 @@ public class ThreadUtil {
         }).start());
         try {
             downLatch.await();
-            return true;
+            return ProcessResult.success();
         } catch (InterruptedException e) {
             logger.error("数据分组处理异常");
-            return false;
+            return ProcessResult.fail("数据分组处理异常");
         }
     }
 }

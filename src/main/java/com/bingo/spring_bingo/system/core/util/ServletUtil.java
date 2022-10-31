@@ -15,7 +15,6 @@ import java.io.IOException;
  **/
 public class ServletUtil {
 
-
     public static ServletRequestAttributes getRequestAttributes() {
         RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
         return (ServletRequestAttributes) attributes;

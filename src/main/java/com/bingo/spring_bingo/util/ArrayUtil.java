@@ -1,7 +1,5 @@
 package com.bingo.spring_bingo.util;
 
-import com.bingo.spring_bingo.system.core.util.ThreadUtil;
-
 import java.util.*;
 
 /**
@@ -199,17 +197,5 @@ public class ArrayUtil {
         } else {
             return Arrays.asList(arr);
         }
-    }
-
-    public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-        list.add("a");
-        list.add("b");
-        list.add("c");
-        list.add("d");
-        list.add("e");
-        List<List<String>> lists = groupBySize(list, 2);
-        boolean b = ThreadUtil.groupHandle(lists, System.out::println);
-        System.out.println(b);
     }
 }
