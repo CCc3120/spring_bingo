@@ -2,6 +2,7 @@ package com.bingo.spring_bingo.system.core.security;
 
 import com.bingo.spring_bingo.system.core.web.model.SysLoginUser;
 import com.bingo.spring_bingo.util.ObjectUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -18,6 +19,7 @@ import java.io.IOException;
  * @author bingo
  * @date 2022-04-29 10:59
  */
+@Slf4j
 @Component
 public class JwtLogoutSuccessHandler implements LogoutSuccessHandler {
 
@@ -32,7 +34,8 @@ public class JwtLogoutSuccessHandler implements LogoutSuccessHandler {
             String fdUserName = loginUser.getUsername();
             // 删除用户缓存记录
             userTokenService.delLoginUser(loginUser.getToken());
-            System.out.println(fdUserName + "退出成功===>>>" + System.currentTimeMillis());
+            log.info("「{}」退出成功", fdUserName);
+            // 退出成功，重定向到指定链接
         }
     }
 }

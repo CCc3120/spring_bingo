@@ -1,10 +1,12 @@
 package com.bingo.spring_bingo.system.core.security;
 
 import com.bingo.spring_bingo.common.constant.SysModelEnum;
+import com.bingo.spring_bingo.system.core.exception.AuthenticationLoginException;
 import com.bingo.spring_bingo.system.core.web.model.SysLoginUser;
 import com.bingo.spring_bingo.system.model.SysOrgUser;
 import com.bingo.spring_bingo.system.service.ISysOrgMenuService;
 import com.bingo.spring_bingo.system.service.ISysOrgUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +19,7 @@ import java.util.Set;
  * @author bingo
  * @date 2022-04-29 14:27
  */
+@Slf4j
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -32,14 +35,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         SysOrgUser user = sysOrgUserService.findByLoginName(username);
 
         if (user == null) {
-            System.out.println("账户不存在");
-            throw new RuntimeException("账户不存在");
+            throw new AuthenticationLoginException(AuthenticationLoginException.NO_ACCOUNT);
         } else if (SysModelEnum.BOOLEAN_NO.getCode().equals(user.getFdIsAvailable())) {
-            System.out.println("账户不可用");
-            throw new RuntimeException("账户不可用");
+            throw new AuthenticationLoginException(AuthenticationLoginException.NO_AVAILABLE);
         } else if (SysModelEnum.BOOLEAN_YES.getCode().equals(user.getFdIsLock())) {
-            System.out.println("账户已锁定");
-            throw new RuntimeException("账户已锁定");
+            throw new AuthenticationLoginException(AuthenticationLoginException.LOCK);
         }
 
         return createLoginUser(user);

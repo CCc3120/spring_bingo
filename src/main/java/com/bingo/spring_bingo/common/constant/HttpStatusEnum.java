@@ -6,7 +6,7 @@ package com.bingo.spring_bingo.common.constant;
  */
 public enum HttpStatusEnum {
     SUCCESS("200", "操作成功"),
-    FAIL("500", "操作失败"),
+    FAIL("201", "操作失败"),
     ERROR("500","系统错误");
 
     private String code;

@@ -73,7 +73,7 @@ public class SysSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         List<String> ignoreUrl = new ArrayList<>();
-        ignoreUrl.add("/student/*");
+        ignoreUrl.add("/sys/login");
 
         List<String> anonymousUrl = new ArrayList<>();
 
@@ -95,7 +95,7 @@ public class SysSecurityConfig extends WebSecurityConfigurerAdapter {
                         formLogin
                                 // .authenticationDetailsSource(authenticationDetailsSource)
                                 // .loginPage("/intologin")
-                                .loginProcessingUrl("/sys/login")
+                                // .loginProcessingUrl("/sys/login")
                                 .permitAll()
                                 // 登录成功处理
                                 .successHandler(jwtLoginSuccessHandler)

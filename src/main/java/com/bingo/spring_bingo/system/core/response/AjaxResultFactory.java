@@ -21,8 +21,16 @@ public class AjaxResultFactory {
         return new AjaxResultBuild(HttpStatusEnum.FAIL.getCode(), HttpStatusEnum.FAIL.getDesc(), null).result();
     }
 
+    public static AjaxResult fail(Object data) {
+        return new AjaxResultBuild(HttpStatusEnum.FAIL.getCode(), HttpStatusEnum.FAIL.getDesc(), data).result();
+    }
+
     public static AjaxResult error() {
         return new AjaxResultBuild(HttpStatusEnum.ERROR.getCode(), HttpStatusEnum.ERROR.getDesc(), null).result();
+    }
+
+    public static AjaxResult error(Object data) {
+        return new AjaxResultBuild(HttpStatusEnum.ERROR.getCode(), HttpStatusEnum.ERROR.getDesc(), data).result();
     }
 
     public static AjaxResult build(HttpStatusEnum httpStatusEnum) {

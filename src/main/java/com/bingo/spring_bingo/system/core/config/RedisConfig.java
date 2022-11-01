@@ -63,7 +63,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisTemplate.setHashValueSerializer(jacksonSeial);
 
         // 此方法bean实例化的时候会调用 为什么还要执行一次
-        redisTemplate.afterPropertiesSet();
+        // redisTemplate.afterPropertiesSet();
 
         return redisTemplate;
     }

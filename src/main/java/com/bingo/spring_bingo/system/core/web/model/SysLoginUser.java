@@ -59,7 +59,6 @@ public class SysLoginUser implements UserDetails {
      * 用户id
      */
     private String fdUserId;
-
     private String fdUsername;
     private String fdPassword;
 

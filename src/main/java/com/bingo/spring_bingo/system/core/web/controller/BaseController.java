@@ -1,6 +1,5 @@
 package com.bingo.spring_bingo.system.core.web.controller;
 
-import com.bingo.spring_bingo.common.constant.HttpStatusEnum;
 import com.bingo.spring_bingo.system.core.response.AjaxResult;
 import com.bingo.spring_bingo.system.core.response.AjaxResultFactory;
 
@@ -23,11 +22,14 @@ public abstract class BaseController {
     }
 
     protected AjaxResult fail(String message) {
-        return AjaxResultFactory.build(HttpStatusEnum.FAIL, message);
+        return AjaxResultFactory.fail(message);
     }
 
     protected AjaxResult error() {
         return AjaxResultFactory.error();
     }
 
+    protected AjaxResult error(String message) {
+        return AjaxResultFactory.error(message);
+    }
 }
