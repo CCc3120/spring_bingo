@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,7 @@ import java.util.*;
  * @author bingo
  * @date 2022-04-29 16:01
  */
+@Slf4j
 public class JsonMapper {
     private static ObjectMapper objectMapper;
 
@@ -84,33 +86,6 @@ public class JsonMapper {
         ;
     }
 
-    public static void main(String[] args) {
-        List<Map<String, String>> list = new ArrayList<>();
-        Map<String, String> map = new HashMap<>();
-        map.put("key1", "value1");
-        map.put("key2", "value2");
-        list.add(map);
-        Map<String, String> map1 = new HashMap<>();
-        map1.put("key3", "value3");
-        map1.put("key4", "value4");
-        list.add(map1);
-        System.out.println(JsonMapper.getInstance().toJsonString(list));
-
-        String str = "[ {\n" +
-                "  \"key1\" : \"value1\",\n" +
-                "  \"key2\" : \"value2\"\n" +
-                "}, {\n" +
-                "  \"key3\" : \"value3\",\n" +
-                "  \"key4\" : \"value4\"\n" +
-                "} ]";
-
-        JsonMapper.getInstance().fromJson(str, list.getClass(), map.getClass());
-        JsonMapper.getInstance().fromJson(str, Map.class, String.class, String.class);
-
-        System.out.println();
-
-    }
-
     public static JsonMapper getInstance() {
         return jsonMapper;
     }
@@ -120,7 +95,7 @@ public class JsonMapper {
         try {
             result = objectMapper.writeValueAsString(t);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            log.warn("Object to JsonString Exception", e);
         }
         return result;
     }
@@ -130,11 +105,10 @@ public class JsonMapper {
         try {
             result = objectMapper.readValue(jsonStr, t);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warn("JsonString to Object Exception", e);
         }
         return result;
     }
-
 
     public <T> List<T> fromJson(String jsonStr, Class<? extends Collection> cls, Class<?> t) {
         List<T> result = null;
@@ -142,7 +116,7 @@ public class JsonMapper {
             JavaType type = objectMapper.getTypeFactory().constructCollectionType(cls, t);
             result = objectMapper.readValue(jsonStr, type);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warn("JsonString to List Exception", e);
         }
         return result;
     }
@@ -153,7 +127,7 @@ public class JsonMapper {
             JavaType type = objectMapper.getTypeFactory().constructMapLikeType(cls, key, value);
             result = objectMapper.readValue(jsonStr, type);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warn("JsonString to Map Exception", e);
         }
         return result;
     }

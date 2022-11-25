@@ -74,6 +74,7 @@ public class SysSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         List<String> ignoreUrl = new ArrayList<>();
         ignoreUrl.add("/sys/login");
+        ignoreUrl.add("/student/**");
 
         List<String> anonymousUrl = new ArrayList<>();
 

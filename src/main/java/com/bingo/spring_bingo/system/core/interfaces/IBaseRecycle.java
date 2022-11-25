@@ -13,7 +13,7 @@ import java.util.Date;
 public interface IBaseRecycle extends IBaseModel {
     // private String fdDeleteFlag;                 // 软删除
     // private Date fdDeleteTime;                   // 软删除时间
-    // private SysOrgUser fdDeleteBy;                   // 删除人
+    // private SysOrgUser fdDeleteBy;               // 删除人
 
     String getFdDeleteFlag();
 

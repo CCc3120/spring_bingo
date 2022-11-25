@@ -11,6 +11,9 @@ import java.util.Date;
  * @author bingo
  * @date 2022-03-23 14:54
  */
+@Getter
+@Setter
+@Document(collection = "mongo_student")
 @TableName(value = "student")
 public class Student {
     @TableId(type = IdType.ASSIGN_UUID)
@@ -22,27 +25,8 @@ public class Student {
     @TableField
     private Date fdBirthday;
 
-    public String getFdId() {
-        return fdId;
-    }
-
-    public void setFdId(String fdId) {
-        this.fdId = fdId;
-    }
-
-    public String getFdName() {
-        return fdName;
-    }
-
-    public void setFdName(String fdName) {
-        this.fdName = fdName;
-    }
-
-    public Date getFdBirthday() {
-        return fdBirthday;
-    }
-
-    public void setFdBirthday(Date fdBirthday) {
-        this.fdBirthday = fdBirthday;
+    @Override
+    public Class<?> getModelFromClass() {
+        return Student.class;
     }
 }

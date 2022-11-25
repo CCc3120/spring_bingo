@@ -154,8 +154,8 @@ mybatis-plus:
     db-config:
 #      自动填充中设置了
 #      id-type: assign_uuid
-      logic-delete-value: N
-      logic-not-delete-value: Y
+      logic-delete-value: 0
+      logic-not-delete-value: 1
 
 
 #=================================token配置=================================

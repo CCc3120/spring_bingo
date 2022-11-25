@@ -3,7 +3,6 @@ package com.bingo.spring_bingo.system.model;
 import com.bingo.spring_bingo.common.constant.SysModelEnum;
 import com.bingo.spring_bingo.system.core.model.BaseModel;
 import com.bingo.spring_bingo.system.interfaces.ISysOrgElement;
-import com.bingo.spring_bingo.util.ObjectUtil;
 import com.bingo.spring_bingo.util.StringUtil;
 
 import java.util.Date;
@@ -126,20 +125,5 @@ public abstract class SysOrgElement extends BaseModel implements ISysOrgElement 
 
     public void setFdAlterTime(Date fdAlterTime) {
         this.fdAlterTime = fdAlterTime;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null) {
-            return false;
-        }
-        if (!(object instanceof SysOrgElement)) {
-            return false;
-        }
-        BaseModel objModel = (BaseModel) object;
-        return ObjectUtil.equals(objModel.getFdId(), this.getFdId(), false);
     }
 }

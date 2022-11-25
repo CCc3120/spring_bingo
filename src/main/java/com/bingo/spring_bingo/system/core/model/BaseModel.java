@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
@@ -20,6 +21,7 @@ import java.lang.reflect.Method;
 @JsonIgnoreProperties(value = {"handler"}) // 解决因懒加载触发序列化问题
 public abstract class BaseModel implements IBaseModel, Serializable {
 
+    @MongoId
     @TableId(value = "fd_id", type = IdType.INPUT)
     private String fdId;
 

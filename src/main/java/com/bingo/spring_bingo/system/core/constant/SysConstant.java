@@ -16,7 +16,7 @@ public interface SysConstant {
      */
     String ADMIN_AUTH = "*:*:*";
     /**
-     * 账号
+     * 管理员账号
      */
     String ADMIN_ACCT = "admin";
 

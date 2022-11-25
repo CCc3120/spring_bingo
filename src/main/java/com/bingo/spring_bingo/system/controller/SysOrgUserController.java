@@ -1,5 +1,6 @@
 package com.bingo.spring_bingo.system.controller;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -46,6 +47,8 @@ public class SysOrgUserController extends BaseController {
         dept.setFdName("部门1");
         sysOrgDeptService.save(dept);
 
+        Wrapper wrapper = new QueryWrapper();
+
 
         return success();
     }
@@ -57,6 +60,7 @@ public class SysOrgUserController extends BaseController {
 
         IPage<SysOrgDept> page = new Page<>(1, 10);
         QueryWrapper<SysOrgDept> wrapper = new QueryWrapper(SysOrgDept.class);
+        wrapper.lambda().select(SysOrgDept::getFdThisLeader);
 
         IPage<SysOrgDept> page1 = sysOrgDeptMapper.findPageList(page);
 

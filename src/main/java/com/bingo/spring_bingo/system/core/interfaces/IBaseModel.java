@@ -6,6 +6,8 @@ package com.bingo.spring_bingo.system.core.interfaces;
  */
 public interface IBaseModel {
 
+    // private String fdId;                 // 主键
+
     String getFdId();
 
     void setFdId(String fdId);

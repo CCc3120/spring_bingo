@@ -198,4 +198,17 @@ public class StringUtil {
         }
         return false;
     }
+
+    /**
+     * 首字母转换小写
+     *
+     * @param str 需要转换的字符串
+     * @return 转换好的字符串
+     */
+    public static String firstToLowerCase( String str) {
+        if (isNull(str)) {
+            return "";
+        }
+        return str.substring(0, 1).toLowerCase() + str.substring(1);
+    }
 }
