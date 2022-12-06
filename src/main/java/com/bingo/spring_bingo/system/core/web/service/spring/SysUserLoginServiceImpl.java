@@ -45,7 +45,7 @@ public class SysUserLoginServiceImpl implements ISysUserLoginService {
                 log.info("「{}」账号密码错误", username);
                 return ProcessResult.fail("账号密码错误");
             }
-            return ProcessResult.fail();
+            return ProcessResult.fail(e.getMessage());
         }
 
         // 登录验证通过的信息

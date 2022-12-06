@@ -36,6 +36,11 @@
         <hutool.version>5.8.5</hutool.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
         <!--springboot 测试-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

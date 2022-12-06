@@ -18,7 +18,7 @@ public class AjaxResultFactory {
     }
 
     public static AjaxResult fail() {
-        return new AjaxResultBuild(HttpStatusEnum.FAIL.getCode(), HttpStatusEnum.FAIL.getDesc(), null).result();
+        return fail(null);
     }
 
     public static AjaxResult fail(Object data) {
@@ -26,7 +26,7 @@ public class AjaxResultFactory {
     }
 
     public static AjaxResult error() {
-        return new AjaxResultBuild(HttpStatusEnum.ERROR.getCode(), HttpStatusEnum.ERROR.getDesc(), null).result();
+        return error(null);
     }
 
     public static AjaxResult error(Object data) {
@@ -34,7 +34,7 @@ public class AjaxResultFactory {
     }
 
     public static AjaxResult build(HttpStatusEnum httpStatusEnum) {
-        return new AjaxResultBuild(httpStatusEnum.getCode(), httpStatusEnum.getDesc(), null).result();
+        return build(httpStatusEnum, null);
     }
 
     public static AjaxResult build(HttpStatusEnum httpStatusEnum, Object data) {
@@ -77,7 +77,7 @@ public class AjaxResultFactory {
         }
 
         public AjaxResult result() {
-            Assert.hasLength(this.code, "status code is not null");
+            Assert.hasLength(this.code, "response status code is not null");
             return new AjaxResult(this.code, this.message, this.data);
         }
     }

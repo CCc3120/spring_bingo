@@ -211,6 +211,16 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
             highlightBuilder.postTags("</span>");
             searchSourceBuilder.highlighter(highlightBuilder);
         }
+
+        // String str = "if(doc['fdCreateTime.keyword'].size()>0) {\n" +
+        //         "        return doc['fdCreateTime.keyword'][0];\n" +
+        //         "      } else { \n" +
+        //         "        return '1970-01-01 00:00:00';\n" +
+        //         "      }";
+        // ScriptSortBuilder scriptSortBuilder = SortBuilders.scriptSort(new Script(str),
+        //         ScriptSortBuilder.ScriptSortType.STRING).order(SortOrder.ASC);
+        // searchSourceBuilder.sort(scriptSortBuilder);
+
         // 精确查询
         // QueryBuilders.termQuery();
         // 匹配所有

@@ -37,6 +37,6 @@ public class SysUserLoginController extends BaseController {
             map.put("token", result.getResult());
             return success(map);
         }
-        return fail(result.getResult());
+        return fail(result.getMessage());
     }
 }

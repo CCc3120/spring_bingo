@@ -6,8 +6,15 @@ public class ProcessResult<T> {
 
     private T result;
 
+    private String message;
+
     public ProcessResult(Boolean isSuccess) {
         this.isSuccess = isSuccess;
+    }
+
+    public ProcessResult(Boolean isSuccess, String message) {
+        this.isSuccess = isSuccess;
+        this.message = message;
     }
 
     public ProcessResult(Boolean isSuccess, T result) {
@@ -31,23 +38,31 @@ public class ProcessResult<T> {
         this.result = result;
     }
 
-    public Boolean isSuccess(){
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Boolean isSuccess() {
         return isSuccess;
     }
 
-    public static <T> ProcessResult<T> success(){
+    public static <T> ProcessResult<T> success() {
         return new ProcessResult<>(true);
     }
 
-    public static <T> ProcessResult<T> success(T t){
+    public static <T> ProcessResult<T> success(T t) {
         return new ProcessResult<>(true, t);
     }
 
-    public static <T> ProcessResult<T> fail(){
+    public static <T> ProcessResult<T> fail() {
         return new ProcessResult<>(false);
     }
 
-    public static <T> ProcessResult<T> fail(T t){
-        return new ProcessResult<>(false, t);
+    public static <T> ProcessResult<T> fail(String message) {
+        return new ProcessResult<>(false, message);
     }
 }
