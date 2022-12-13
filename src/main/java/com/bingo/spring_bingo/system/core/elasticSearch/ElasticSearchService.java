@@ -1,6 +1,8 @@
 package com.bingo.spring_bingo.system.core.elasticSearch;
 
 import com.bingo.spring_bingo.system.core.interfaces.IBaseModel;
+import com.bingo.spring_bingo.system.core.util.page.BaseSearchModel;
+import com.bingo.spring_bingo.system.core.util.page.PageResult;
 
 import java.util.List;
 import java.util.Map;
@@ -80,6 +82,16 @@ public interface ElasticSearchService {
      * @param contents
      */
     boolean bulkRequest(String index, List<IBaseModel> contents) throws Exception;
+
+    /**
+     * @MethodName searchRequest
+     * @Description 简单的分页查询
+     * @Param [clazz, index, model, condition]
+     * @Return com.bingo.spring_bingo.system.core.util.page.PageResult<T>
+     * @Date 2022-12-13 15:11
+     */
+    <T> PageResult<T> searchRequest(Class<T> clazz, String index, BaseSearchModel model,
+            ElasticSearchCondition condition) throws Exception;
 
     /**
      * 搜索请求

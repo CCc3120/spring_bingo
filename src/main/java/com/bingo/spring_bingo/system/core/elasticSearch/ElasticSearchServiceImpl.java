@@ -4,6 +4,8 @@ import com.bingo.spring_bingo.system.core.constant.ElasticSearchConstant;
 import com.bingo.spring_bingo.system.core.interfaces.IBaseModel;
 import com.bingo.spring_bingo.system.core.util.FieldUtil;
 import com.bingo.spring_bingo.system.core.util.JsonMapper;
+import com.bingo.spring_bingo.system.core.util.page.BaseSearchModel;
+import com.bingo.spring_bingo.system.core.util.page.PageResult;
 import com.bingo.spring_bingo.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
@@ -28,12 +30,14 @@ import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -172,12 +176,60 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
         // 批量插入
         BulkRequest bulkRequest = new BulkRequest();
         bulkRequest.timeout(TimeValue.timeValueSeconds(1));
-        contents.forEach(model -> bulkRequest.add(
-                new IndexRequest(index)
-                        .id(model.getFdId())
-                        .source(JsonMapper.getInstance().toJsonString(model), XContentType.JSON)));
+        contents.forEach(model ->
+                bulkRequest.add(
+                        new IndexRequest(index)
+                                .id(model.getFdId())
+                                .source(JsonMapper.getInstance().toJsonString(model), XContentType.JSON)
+                )
+        );
         BulkResponse bulkItemResponse = restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
         return !bulkItemResponse.hasFailures();
+    }
+
+    @Override
+    public <T> PageResult<T> searchRequest(Class<T> clazz, String index, BaseSearchModel model,
+            ElasticSearchCondition condition) throws Exception {
+        // 搜索请求
+        SearchRequest searchRequest;
+        if (StringUtil.isNull(index)) {
+            searchRequest = new SearchRequest();
+        } else {
+            searchRequest = new SearchRequest(index);
+        }
+        // 条件构造
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
+        // 创建条件构造器
+        BoolQueryBuilder builder = QueryBuilders.boolQuery();
+        // 自己实现条件构造
+        condition.build(builder);
+
+        // 设置查询条件
+        searchSourceBuilder.query(builder);
+
+        // 分页信息
+        long from = (model.getPageNum() - 1) * model.getPageSize();
+        searchSourceBuilder.from((int) from).size((int) model.getPageSize());
+
+        // 排序
+        if (StringUtil.isNotNull(model.getOrderProp())) {
+            searchSourceBuilder.sort(StringUtil.join(model.getOrderProp(), ElasticSearchConstant.KEYWORD),
+                    SortOrder.fromString(model.getOrderType()));
+        }
+
+        searchSourceBuilder.timeout(TimeValue.timeValueSeconds(10));
+
+        searchRequest.source(searchSourceBuilder);
+
+        SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+        //  总数，分页查询可用
+        long totalHits = searchResponse.getHits().getTotalHits();
+        List<T> data = new ArrayList<>();
+        for (SearchHit searchHit : searchResponse.getHits().getHits()) {
+            data.add(JsonMapper.getInstance().fromJson(searchHit.getSourceAsString(), clazz));
+        }
+        return PageResult.of(data, totalHits, model);
     }
 
     @Override

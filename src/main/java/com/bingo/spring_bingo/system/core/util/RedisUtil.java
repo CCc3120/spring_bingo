@@ -1,5 +1,6 @@
 package com.bingo.spring_bingo.system.core.util;
 
+import com.bingo.spring_bingo.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ public class RedisUtil {
     /**
      * 分割符
      */
-    public static final String DECOLLATOR = ":";
+    public static final String DECOLLATOR = StringUtil.SEPARATOR_COLON;
 
     /**
      * 应用前缀

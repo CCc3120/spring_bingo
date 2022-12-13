@@ -20,6 +20,15 @@ public class StringUtil {
 
     private static Logger logger = LoggerFactory.getLogger(StringUtil.class);
 
+    //==========分割符===========
+    public static final String SEPARATOR_SEMICOLON = ";";
+    public static final String SEPARATOR_MIDDLE_LINE = "-";
+    public static final String SEPARATOR_COLON = ":";
+    public static final String SEPARATOR_BELOW_LINE = "_";
+    public static final String SEPARATOR_COMMA = ",";
+    public static final String SEPARATOR_POINT = ".";
+
+
     /**
      * 判断一个字符串是否为null或空
      *
@@ -76,6 +85,16 @@ public class StringUtil {
             }
         }
         return ret;
+    }
+
+    /**
+     * 字符串连接，按照指定的分隔符
+     *
+     * @param str
+     * @return
+     */
+    public static String join(String... str) {
+        return join(str, "");
     }
 
     /**
@@ -165,13 +184,13 @@ public class StringUtil {
         }
         HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
         if (isLow) {
-            //拼音小写
+            // 拼音小写
             format.setCaseType(HanyuPinyinCaseType.LOWERCASE);
         } else {
-            //拼音大写
+            // 拼音大写
             format.setCaseType(HanyuPinyinCaseType.UPPERCASE);
         }
-        //不带声调
+        // 不带声调
         format.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
         try {
             return PinyinHelper.toHanYuPinyinString(message, format, separate, retain);
@@ -205,7 +224,7 @@ public class StringUtil {
      * @param str 需要转换的字符串
      * @return 转换好的字符串
      */
-    public static String firstToLowerCase( String str) {
+    public static String firstToLowerCase(String str) {
         if (isNull(str)) {
             return "";
         }

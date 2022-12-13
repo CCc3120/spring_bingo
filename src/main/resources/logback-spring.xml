@@ -43,8 +43,10 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.path}/trace/log-trace-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!--文件达到 最大20MB时会被压缩和切割 -->
                 <maxFileSize>20MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- 最多保存15天 -->
             <maxHistory>15</maxHistory>
         </rollingPolicy>
         <!--LevelFilter： 级别过滤器，根据日志级别进行过滤。如果日志级别等于配置级别，过滤器会根据onMath 和 onMismatch接收或拒绝日志。有以下子节点：-->
@@ -182,9 +184,9 @@
     <!--这里的name和业务类中的getLogger中的字符串是一样的-->
 <!--    @Slf4j(topic = "xiaoming")-->
 <!--    private Logger xiaoming = LoggerFactory.getLogger("xiaoming");-->
-    <logger name="xiaoming" level="INFO" additivity="true">
-        <appender-ref ref="CLASS-APPENDER" />
-    </logger>
+<!--    <logger name="xiaoming" level="INFO" additivity="true">-->
+<!--        <appender-ref ref="CLASS-APPENDER" />-->
+<!--    </logger>-->
 
     <!--
         <logger>用来设置某一个包或者具体的某一个类的日志打印级别、 以及指定<appender>。
